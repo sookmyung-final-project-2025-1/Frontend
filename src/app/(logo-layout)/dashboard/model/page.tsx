@@ -7,7 +7,6 @@ import ModelDashboard from '@/components/model/ModelDashboard';
 import ModelPredictorPanel from '@/components/model/ModelPredictorPanel';
 import SingleModelRunner from '@/components/model/SingleModelRunner';
 import ThresholdSettings from '@/components/model/ThresholdSettings';
-import WeightsSettings from '@/components/model/WeightsSettings';
 import { useDashboardData } from '@/contexts/DashboardActionsContext';
 import { useState } from 'react';
 
@@ -28,21 +27,13 @@ export default function ModelPage() {
       <section className='bg-slate-900/40 border border-slate-800 rounded-xl p-8'>
         {/* 1행: 가중치(7) + 임계값(3) */}
         <div className='grid grid-cols-10 gap-8'>
-          <div className='col-span-7'>
-            <h3 className='text-xl font-semibold text-slate-200 mb-6'>
-              모델별 가중치 설정
-            </h3>
-            <WeightsSettings />
-          </div>
-          <div className='col-span-3'>
-            <h3 className='text-xl font-semibold text-slate-200 mb-6'>
-              임계치 설정
-            </h3>
-            <ThresholdSettings
-              onChange={setThreshold}
-              onSave={handleSaveThreshold}
-            />
-          </div>
+          <h3 className='text-xl font-semibold text-slate-200 mb-6'>
+            임계치 설정
+          </h3>
+          <ThresholdSettings
+            onChange={setThreshold}
+            onSave={handleSaveThreshold}
+          />
         </div>
 
         {/* 구분선 */}
