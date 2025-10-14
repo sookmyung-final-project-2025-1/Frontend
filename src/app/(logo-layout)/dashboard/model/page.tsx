@@ -4,7 +4,6 @@
 import ConfidenceChart from '@/components/model/ConfidenceChart';
 import FeatureImportanceChart from '@/components/model/FeatureImportanceChart';
 import ModelDashboard from '@/components/model/ModelDashboard';
-import ModelPredictorPanel from '@/components/model/ModelPredictorPanel';
 import SingleModelRunner from '@/components/model/SingleModelRunner';
 import ThresholdSettings from '@/components/model/ThresholdSettings';
 import { useDashboardData } from '@/contexts/DashboardActionsContext';
@@ -26,21 +25,13 @@ export default function ModelPage() {
       {/* ✅ 한 섹션으로 묶어서 border 공유 */}
       <section className='bg-slate-900/40 border border-slate-800 rounded-xl p-8'>
         {/* 1행: 가중치(7) + 임계값(3) */}
-        <div className='grid grid-cols-10 gap-8'>
-          <h3 className='text-xl font-semibold text-slate-200 mb-6'>
-            임계치 설정
-          </h3>
-          <ThresholdSettings
-            onChange={setThreshold}
-            onSave={handleSaveThreshold}
-          />
-        </div>
-
-        {/* 구분선 */}
-        <div className='my-8 border-t border-slate-800' />
-
-        {/* 2행: 앙상블 가중치 테스트(embedded) */}
-        <ModelPredictorPanel embedded />
+        <h3 className='text-xl font-semibold text-slate-200 mb-6'>
+          임계치 설정
+        </h3>
+        <ThresholdSettings
+          onChange={setThreshold}
+          onSave={handleSaveThreshold}
+        />
 
         {/* 구분선 */}
         <div className='my-8 border-t border-slate-800' />
