@@ -14,7 +14,7 @@ export default function DashboardPage() {
   return (
     <div className='space-y-8'>
       {error.any && (
-        <div className='bg-red-900 border border-red-700 rounded-lg p-4 text-red-200'>
+        <div className='rounded-lg border border-red-200 bg-red-50 p-4 text-red-600'>
           일부 데이터를 불러오는 중 오류가 발생했습니다.
         </div>
       )}
@@ -25,8 +25,8 @@ export default function DashboardPage() {
 
       <section className='grid grid-cols-1 gap-8'>
         <div className='col-span-1'>
-          <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-8 relative'>
-            <h2 className='text-xl font-semibold text-slate-200'>
+          <div className='relative rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
+            <h2 className='text-xl font-semibold text-slate-900'>
               사기 거래 트렌드 분석
             </h2>
             <div>
@@ -38,8 +38,8 @@ export default function DashboardPage() {
 
       <section className='grid grid-cols-1 gap-8'>
         <div className='col-span-1'>
-          <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-8 relative'>
-            <h3 className='text-xl font-semibold text-slate-200 mb-6'>
+          <div className='relative rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
+            <h3 className='mb-6 text-xl font-semibold text-slate-900'>
               시스템 헬스 상태
             </h3>
             <div className='min-h-[500px]'>
@@ -51,8 +51,8 @@ export default function DashboardPage() {
 
       <section className='grid grid-cols-1 gap-8'>
         <div className='col-span-1'>
-          <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-8 relative'>
-            <h3 className='text-xl font-semibold text-slate-200 mb-6'>
+          <div className='relative rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
+            <h3 className='mb-6 text-xl font-semibold text-slate-900'>
               확률 분석
             </h3>
             <div className='flex flex-col space-y-6 w-full'>
@@ -66,8 +66,8 @@ export default function DashboardPage() {
       {/* 
       <section className='grid grid-cols-1 gap-8'>
         <div className='col-span-1'>
-          <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-8 relative'>
-            <h3 className='text-xl font-semibold text-slate-200 mb-6'>
+          <div className='relative rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
+            <h3 className='mb-6 text-xl font-semibold text-slate-900'>
               고위험 거래 조회
             </h3>
             <div className='min-h-[500px]'>

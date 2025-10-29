@@ -304,7 +304,7 @@ export default function MockStreamingDashboard() {
         slidingWindowSize={60}
       />
 
-      <div className='rounded-xl border border-slate-700 bg-slate-900 px-4 pt-4 pb-8 h-72'>
+      <div className='h-72 rounded-xl border border-[#0E2975] bg-white px-4 pt-4 pb-8 shadow-sm'>
         <h4 className='text-sm text-slate-300 mb-3'>Sliding Fraud Score</h4>
         <SlidingLineChart
           data={slidingWindow.map((t) => ({

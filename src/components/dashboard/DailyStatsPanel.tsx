@@ -102,11 +102,11 @@ export default function DailyStatsPanel() {
   const empty = !isLoading && chartData.length === 0;
 
   return (
-    <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-6 space-y-6 w-full'>
+    <div className='w-full space-y-6 rounded-xl border border-[#0E2975] bg-white p-6 shadow-sm'>
       <header className='flex flex-col md:flex-row md:items-center gap-4'>
         <div className='flex-1'>
-          <h3 className='text-xl font-semibold text-slate-200'>일별 통계</h3>
-          <p className='text-slate-400 text-sm'>
+          <h3 className='text-xl font-semibold text-slate-900'>일별 통계</h3>
+          <p className='text-sm text-slate-600'>
             선택한 날짜의 00:00부터 다음날 00:00까지(KST, +09:00) 구간으로
             조회합니다.
           </p>
@@ -122,7 +122,7 @@ export default function DailyStatsPanel() {
               const maxDay = daysInMonth(y, month);
               if (day > maxDay) setDay(maxDay);
             }}
-            className='rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100'
+            className='rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
           >
             {years.map((y) => (
               <option key={y} value={y}>
@@ -138,7 +138,7 @@ export default function DailyStatsPanel() {
               const maxDay = daysInMonth(year, m);
               if (day > maxDay) setDay(maxDay);
             }}
-            className='rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100'
+            className='rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
           >
             {months.map((m) => (
               <option key={m} value={m}>
@@ -149,7 +149,7 @@ export default function DailyStatsPanel() {
           <select
             value={day}
             onChange={(e) => setDay(Number(e.target.value))}
-            className='rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100'
+            className='rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
           >
             {days.map((d) => (
               <option key={d} value={d}>
@@ -161,9 +161,9 @@ export default function DailyStatsPanel() {
       </header>
 
       {/* 상태 표시 */}
-      {isLoading && <div className='text-slate-300'>불러오는 중입니다…</div>}
+      {isLoading && <div className='text-slate-500'>불러오는 중입니다…</div>}
       {error && (
-        <div className='text-red-300'>
+        <div className='text-red-600'>
           데이터를 불러오지 못했습니다: {(error as any)?.message ?? '에러'}
         </div>
       )}
@@ -171,8 +171,8 @@ export default function DailyStatsPanel() {
       {/* 차트들 */}
       <div className='grid grid-cols-1 xl:grid-cols-2 gap-6'>
         {/* 거래수/사기수 */}
-        <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
-          <h4 className='text-lg font-semibold text-slate-200 mb-2'>
+        <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
+          <h4 className='mb-2 text-lg font-semibold text-slate-900'>
             거래수 & 사기 거래수
           </h4>
           <div className='h-72'>
@@ -184,9 +184,17 @@ export default function DailyStatsPanel() {
                     : chartData
                 }
               >
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='date' />
-                <YAxis allowDecimals={false} />
+                <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
+                <XAxis
+                  dataKey='date'
+                  stroke='#94A3B8'
+                  tick={{ fill: '#64748B' }}
+                />
+                <YAxis
+                  allowDecimals={false}
+                  stroke='#94A3B8'
+                  tick={{ fill: '#64748B' }}
+                />
                 <Tooltip
                   formatter={(v, name) => {
                     const num = Number(v);
@@ -195,6 +203,14 @@ export default function DailyStatsPanel() {
                       name === 'totalCount' ? '거래수' : '사기수',
                     ];
                   }}
+                  contentStyle={{
+                    background: '#ffffff',
+                    border: '1px solid #E5E7EB',
+                    borderRadius: '8px',
+                    color: '#0f172a',
+                  }}
+                  labelStyle={{ color: '#64748B' }}
+                  itemStyle={{ color: '#1f2937' }}
                 />
                 <Legend
                   formatter={(value) =>
@@ -221,8 +237,8 @@ export default function DailyStatsPanel() {
         </div>
 
         {/* 사기율(%) */}
-        <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
-          <h4 className='text-lg font-semibold text-slate-200 mb-2'>
+        <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
+          <h4 className='mb-2 text-lg font-semibold text-slate-900'>
             사기율(%)
           </h4>
           <div className='h-72'>
@@ -232,14 +248,28 @@ export default function DailyStatsPanel() {
                   empty ? ([{ date: '—', fraudRatePct: 0 }] as any) : chartData
                 }
               >
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='date' />
+                <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
+                <XAxis
+                  dataKey='date'
+                  stroke='#94A3B8'
+                  tick={{ fill: '#64748B' }}
+                />
                 <YAxis
                   domain={[0, 100]}
+                  stroke='#94A3B8'
+                  tick={{ fill: '#64748B' }}
                   tickFormatter={(v) => `${Number(v).toFixed(0)}%`}
                 />
                 <Tooltip
                   formatter={(v) => [`${Number(v).toFixed(2)}%`, '사기율']}
+                  contentStyle={{
+                    background: '#ffffff',
+                    border: '1px solid #E5E7EB',
+                    borderRadius: '8px',
+                    color: '#0f172a',
+                  }}
+                  labelStyle={{ color: '#64748B' }}
+                  itemStyle={{ color: '#1f2937' }}
                 />
                 <Legend
                   formatter={(v) => (v === 'fraudRatePct' ? '사기율' : v)}
@@ -258,12 +288,12 @@ export default function DailyStatsPanel() {
       </div>
 
       {/* 표 */}
-      <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
-        <h4 className='text-lg font-semibold text-slate-200 mb-3'>세부 내역</h4>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
+        <h4 className='mb-3 text-lg font-semibold text-slate-900'>세부 내역</h4>
         <div className='overflow-x-auto'>
           <table className='min-w-full text-sm'>
             <thead>
-              <tr className='text-slate-300 border-b border-slate-800'>
+              <tr className='border-b border-gray-200 text-slate-600'>
                 <th className='px-4 py-2 text-left'>슬롯(날짜/시간)</th>
                 <th className='px-4 py-2 text-right'>거래수</th>
                 <th className='px-4 py-2 text-right'>사기수</th>
@@ -272,15 +302,15 @@ export default function DailyStatsPanel() {
             </thead>
             <tbody>
               {(empty ? [] : chartData).map((row) => (
-                <tr key={row.date} className='border-b border-slate-800'>
-                  <td className='px-4 py-2 text-slate-300'>{row.date}</td>
-                  <td className='px-4 py-2 text-right text-slate-200'>
+                <tr key={row.date} className='border-b border-gray-100'>
+                  <td className='px-4 py-2 text-slate-700'>{row.date}</td>
+                  <td className='px-4 py-2 text-right text-slate-800'>
                     {row.totalCount?.toLocaleString()}
                   </td>
-                  <td className='px-4 py-2 text-right text-slate-200'>
+                  <td className='px-4 py-2 text-right text-slate-800'>
                     {row.fraudCount?.toLocaleString()}
                   </td>
-                  <td className='px-4 py-2 text-right text-slate-200'>
+                  <td className='px-4 py-2 text-right text-slate-800'>
                     {row.fraudRatePct.toFixed(2)}%
                   </td>
                 </tr>
@@ -288,7 +318,7 @@ export default function DailyStatsPanel() {
               {empty && (
                 <tr>
                   <td
-                    className='px-4 py-6 text-center text-slate-400'
+                    className='px-4 py-6 text-center text-slate-500'
                     colSpan={4}
                   >
                     선택한 날짜에 대한 데이터가 없습니다.

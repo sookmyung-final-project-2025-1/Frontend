@@ -23,9 +23,9 @@ export default function ModelPage() {
       <ModelDashboard />
 
       {/* ✅ 한 섹션으로 묶어서 border 공유 */}
-      <section className='bg-slate-900/40 border border-slate-800 rounded-xl p-8'>
+      <section className='rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
         {/* 1행: 가중치(7) + 임계값(3) */}
-        <h3 className='text-xl font-semibold text-slate-200 mb-6'>
+        <h3 className='mb-6 text-xl font-semibold text-slate-900'>
           임계치 설정
         </h3>
         <ThresholdSettings
@@ -34,23 +34,23 @@ export default function ModelPage() {
         />
 
         {/* 구분선 */}
-        <div className='my-8 border-t border-slate-800' />
+        <div className='my-8 border-t border-[#0E2975]' />
 
         {/* 3행: 단일 모델 테스트(embedded) */}
         <SingleModelRunner embedded />
       </section>
 
       {/* 신뢰도 */}
-      <section className='bg-slate-900/40 border border-slate-800 rounded-xl p-8 relative'>
-        <h3 className='text-xl font-semibold text-slate-200 mb-6'>
+      <section className='relative rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
+        <h3 className='mb-6 text-xl font-semibold text-slate-900'>
           신뢰도 분석
         </h3>
         <ConfidenceChart range={confidenceRange} />
       </section>
 
       {/* 특성 중요도 */}
-      <section className='bg-slate-900/40 border border-slate-800 rounded-xl p-8 relative'>
-        <h3 className='text-xl font-semibold text-slate-200 mb-6'>
+      <section className='relative rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
+        <h3 className='mb-6 text-xl font-semibold text-slate-900'>
           특성 중요도
         </h3>
         <div className='h-[350px]'>

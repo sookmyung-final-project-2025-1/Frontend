@@ -31,18 +31,18 @@ export default function FraudTrend() {
     <div className='space-y-8'>
       {/* 헤더/컨트롤: 항상 보이도록 */}
       <div>
-        <p className='text-slate-400 text-sm'>
+        <p className='text-sm text-slate-600'>
           {new Date(selectedDate).toLocaleDateString('ko-KR')}
           {' · '}
           {intervalLabel[interval]}
           {' · '}
-          <span className='text-slate-500'>
+          <span className='text-slate-700'>
             {startDateLabel} ~ {endDateLabel}
           </span>
         </p>
       </div>
 
-      <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
         <Controls
           selectedDate={selectedDate}
           interval={interval}

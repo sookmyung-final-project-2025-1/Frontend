@@ -10,8 +10,8 @@ export default function SectionCard({
   children: ReactNode;
 }) {
   return (
-    <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-6'>
-      <h3 className='text-lg font-semibold text-slate-200 mb-4'>{title}</h3>
+    <div className='rounded-xl border border-[#0E2975] bg-white p-6 shadow-sm'>
+      <h3 className='mb-4 text-lg font-semibold text-slate-900'>{title}</h3>
       {children}
     </div>
   );

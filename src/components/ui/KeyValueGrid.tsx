@@ -10,10 +10,10 @@ export default function KeyValueGrid({ items }: { items: Item[] }) {
       {items.map((it, idx) => (
         <div
           key={idx}
-          className='flex items-start justify-between gap-4 rounded-lg border border-slate-800 bg-slate-900/30 px-4 py-3'
+          className='flex items-start justify-between gap-4 rounded-lg border border-[#0E2975] bg-white px-4 py-3 shadow-sm'
         >
-          <div className='text-sm text-slate-400'>{it.k}</div>
-          <div className='text-sm text-slate-100 text-right break-words'>
+          <div className='text-sm text-slate-600'>{it.k}</div>
+          <div className='text-right text-sm text-slate-900 break-words'>
             {it.v ?? '-'}
           </div>
         </div>

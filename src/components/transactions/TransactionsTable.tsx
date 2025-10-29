@@ -35,19 +35,19 @@ export default function TransactionsTable({
   const router = useRouter();
 
   return (
-    <div className='rounded-xl border border-slate-800 bg-slate-900/40 overflow-hidden min-h-[220px]'>
+    <div className='min-h-[220px] overflow-hidden rounded-xl border border-[#0E2975] bg-white shadow-sm'>
       {error ? (
-        <div className='flex items-center justify-center py-16 text-red-400'>
+        <div className='flex items-center justify-center py-16 text-red-600'>
           데이터를 불러오지 못했습니다.
         </div>
       ) : isLoading && data.length === 0 ? (
-        <div className='flex items-center justify-center py-16 text-slate-400'>
+        <div className='flex items-center justify-center py-16 text-slate-500'>
           불러오는 중…
         </div>
       ) : (
         <div className='overflow-x-auto'>
-          <table className='min-w-full divide-y divide-slate-800'>
-            <thead className='bg-slate-900'>
+        <table className='min-w-full divide-y divide-gray-200'>
+          <thead className='bg-white'>
               <tr>
                 {[
                   '거래 ID',
@@ -60,7 +60,7 @@ export default function TransactionsTable({
                 ].map((h) => (
                   <th
                     key={h}
-                    className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400'
+                    className='px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-600'
                   >
                     {h}
                   </th>
@@ -82,21 +82,21 @@ export default function TransactionsTable({
                 data.map((t, i) => (
                   <tr
                     key={String(t.id) ?? i}
-                    className='hover:bg-slate-800/50 cursor-pointer'
+                    className='cursor-pointer transition hover:bg-gray-100'
                   >
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-slate-100'>
+                    <td className='whitespace-nowrap px-6 py-4 text-sm text-slate-900'>
                       {t.id}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-slate-300'>
+                    <td className='whitespace-nowrap px-6 py-4 text-sm text-slate-700'>
                       {t.userId}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-slate-300'>
+                    <td className='whitespace-nowrap px-6 py-4 text-sm text-slate-700'>
                       {t.merchant}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-slate-300'>
+                    <td className='whitespace-nowrap px-6 py-4 text-sm text-slate-700'>
                       {t.merchantCategory ?? t.category ?? '—'}
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-100'>
+                    <td className='whitespace-nowrap px-6 py-4 text-sm font-semibold text-slate-900'>
                       {Number.isFinite(t.amount as any)
                         ? formatAmount(t.amount)
                         : '—'}
@@ -105,14 +105,14 @@ export default function TransactionsTable({
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                           t.isFraud
-                            ? 'bg-[#F8717126] text-[#FCA5A5]' // red-400/15, red-300 (hex)
-                            : 'bg-[#4ADE8026] text-[#86EFAC]' // green-400/15, green-300 (hex)
+                            ? 'border border-red-200 bg-red-100 text-red-700'
+                            : 'border border-emerald-200 bg-emerald-100 text-emerald-700'
                         }`}
                       >
                         {t.isFraud ? '사기' : '정상'}
                       </span>
                     </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-slate-400'>
+                    <td className='whitespace-nowrap px-6 py-4 text-sm text-slate-600'>
                       {formatDate(t)}
                     </td>
                   </tr>

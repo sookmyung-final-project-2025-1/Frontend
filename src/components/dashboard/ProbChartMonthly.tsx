@@ -110,36 +110,36 @@ export default function ProbChartMonthly() {
   const hasRange = Boolean(startISO && endISO && !invalidRange);
 
   return (
-    <div className='rounded-2xl border border-slate-800 bg-slate-900/40 xl:col-span-2 h-fit'>
+    <div className='rounded-2xl border border-[#0E2975] bg-white shadow-sm xl:col-span-2 h-fit'>
       <div className='p-6'>
-        <div className='text-xl font-semibold text-slate-200'>월간 지표</div>
+        <div className='text-xl font-semibold text-slate-900'>월간 지표</div>
 
         {/* 컨트롤 */}
         <div className='mb-3 grid grid-cols-1 md:grid-cols-3 gap-3'>
           <div>
-            <label className='block text-xs text-slate-400 mb-1'>시작월</label>
+            <label className='block text-xs text-slate-600 mb-1'>시작월</label>
             <input
               type='month'
               value={startMonthLocal}
               onChange={(e) => setStartMonthLocal(e.target.value)}
-              className='w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100'
+              className='w-full rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-800 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
               max={endMonthLocal}
             />
           </div>
           <div>
-            <label className='block text-xs text-slate-400 mb-1'>종료월</label>
+            <label className='block text-xs text-slate-600 mb-1'>종료월</label>
             <input
               type='month'
               value={endMonthLocal}
               onChange={(e) => setEndMonthLocal(e.target.value)}
-              className='w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100'
+              className='w-full rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-800 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
               min={startMonthLocal}
               max={toMonthInput(today)}
             />
           </div>
           <div className='flex items-end'>
             <div
-              className='w-full h-[38px] flex items-center justify-center rounded-lg border border-slate-800 bg-slate-900/40 text-slate-400'
+              className='flex h-[38px] w-full items-center justify-center rounded-lg border border-[#0E2975] bg-white text-slate-500 shadow-sm'
               title='기간은 월 단위로 조회됩니다 (종료월의 다음달 1일 00:00까지)'
             >
               월 단위 조회
@@ -147,13 +147,13 @@ export default function ProbChartMonthly() {
           </div>
         </div>
 
-        <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
+        <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
           {/* 상태 */}
-          <div className='text-xs text-slate-500 mb-2'>
-            범위: <code className='text-slate-300'>{startMonthLocal}</code> ~{' '}
-            <code className='text-slate-300'>{endMonthLocal}</code>
+          <div className='mb-2 text-xs text-slate-600'>
+            범위: <code className='text-slate-700'>{startMonthLocal}</code> ~{' '}
+            <code className='text-slate-700'>{endMonthLocal}</code>
             {!invalidRange ? null : (
-              <span className='text-red-400 ml-2'>
+              <span className='ml-2 text-red-600'>
                 (시작월이 종료월보다 늦습니다)
               </span>
             )}
@@ -162,12 +162,12 @@ export default function ProbChartMonthly() {
           {/* 1) 거래수 & 사기수 & 사기율(%) */}
           <div className='h-72 mb-6'>
             {!invalidRange && (!hasRange || isLoading) && (
-              <div className='h-full flex items-center justify-center text-slate-400'>
+              <div className='h-full flex items-center justify-center text-slate-500'>
                 {hasRange ? '불러오는 중…' : '월 범위를 선택해 주세요'}
               </div>
             )}
             {!invalidRange && error && (
-              <div className='h-full flex items-center justify-center text-red-400'>
+              <div className='h-full flex items-center justify-center text-red-600'>
                 데이터를 불러오지 못했습니다.
               </div>
             )}
@@ -177,27 +177,34 @@ export default function ProbChartMonthly() {
                   data={chartData}
                   margin={{ top: 8, right: 12, left: 12, bottom: 8 }}
                 >
-                  <CartesianGrid strokeDasharray='3 3' stroke='#374151' />
-                  <XAxis dataKey='monthLabel' stroke='#9CA3AF' fontSize={12} />
+                  <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
+                  <XAxis
+                    dataKey='monthLabel'
+                    stroke='#94A3B8'
+                    fontSize={12}
+                    tick={{ fill: '#64748B' }}
+                  />
 
                   {/* 왼쪽 Y: 건수 */}
                   <YAxis
                     yAxisId='left'
-                    stroke='#9CA3AF'
+                    stroke='#94A3B8'
                     fontSize={12}
                     width={48}
                     allowDecimals={false}
+                    tick={{ fill: '#64748B' }}
                   />
 
                   {/* 오른쪽 Y: 사기율(%) */}
                   <YAxis
                     yAxisId='right'
                     orientation='right'
-                    stroke='#9CA3AF'
+                    stroke='#94A3B8'
                     fontSize={12}
                     width={56}
                     domain={[0, 100]}
                     tickFormatter={fmtPct}
+                    tick={{ fill: '#64748B' }}
                   />
 
                   <Tooltip
@@ -222,11 +229,12 @@ export default function ProbChartMonthly() {
                     }}
                     labelFormatter={(label) => `월: ${label as string}`}
                     contentStyle={{
-                      background: '#0f172a',
-                      border: '1px solid #334155',
+                      background: '#ffffff',
+                      border: '1px solid #E5E7EB',
+                      borderRadius: '8px',
                     }}
-                    labelStyle={{ color: '#cbd5e1' }}
-                    itemStyle={{ color: '#e2e8f0' }}
+                    labelStyle={{ color: '#64748B' }}
+                    itemStyle={{ color: '#1f2937' }}
                   />
 
                   <Legend
@@ -295,26 +303,33 @@ export default function ProbChartMonthly() {
                   data={chartData}
                   margin={{ top: 8, right: 12, left: 12, bottom: 8 }}
                 >
-                  <CartesianGrid strokeDasharray='3 3' stroke='#374151' />
-                  <XAxis dataKey='monthLabel' stroke='#9CA3AF' fontSize={12} />
+                  <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
+                  <XAxis
+                    dataKey='monthLabel'
+                    stroke='#94A3B8'
+                    fontSize={12}
+                    tick={{ fill: '#64748B' }}
+                  />
 
                   {/* 왼쪽 Y: 총 금액(₩) */}
                   <YAxis
                     yAxisId='left'
-                    stroke='#9CA3AF'
+                    stroke='#94A3B8'
                     fontSize={12}
                     width={64}
                     tickFormatter={(v) => fmtKRW(Number(v))}
+                    tick={{ fill: '#64748B' }}
                   />
 
                   {/* 오른쪽 Y: 평균 금액(₩) */}
                   <YAxis
                     yAxisId='right'
                     orientation='right'
-                    stroke='#9CA3AF'
+                    stroke='#94A3B8'
                     fontSize={12}
                     width={64}
                     tickFormatter={(v) => fmtKRW(Number(v))}
+                    tick={{ fill: '#64748B' }}
                   />
 
                   <Tooltip
@@ -330,11 +345,12 @@ export default function ProbChartMonthly() {
                     }}
                     labelFormatter={(label) => `월: ${label as string}`}
                     contentStyle={{
-                      background: '#0f172a',
-                      border: '1px solid #334155',
+                      background: '#ffffff',
+                      border: '1px solid #E5E7EB',
+                      borderRadius: '8px',
                     }}
-                    labelStyle={{ color: '#cbd5e1' }}
-                    itemStyle={{ color: '#e2e8f0' }}
+                    labelStyle={{ color: '#64748B' }}
+                    itemStyle={{ color: '#1f2937' }}
                   />
 
                   <Legend

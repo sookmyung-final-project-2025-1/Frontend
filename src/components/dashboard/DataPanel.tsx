@@ -102,21 +102,21 @@ export default function DataPanel({ startTime, endTime, interval }: Props) {
 
   if (error) {
     return (
-      <div className='rounded-xl border border-slate-800 bg-slate-900/40 p-6 text-[#FCA5A5]'>
+      <div className='rounded-xl border border-red-200 bg-red-50 p-6 text-red-600 shadow-sm'>
         데이터를 불러오지 못했습니다.
       </div>
     );
   }
   if (isLoading && chartData.length === 0) {
     return (
-      <div className='rounded-xl border border-slate-800 bg-slate-900/40 p-6 text-slate-400'>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-6 text-slate-600 shadow-sm'>
         불러오는 중…
       </div>
     );
   }
   if (chartData.length === 0) {
     return (
-      <div className='rounded-xl border border-slate-800 bg-slate-900/40 p-6 text-slate-400'>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-6 text-slate-600 shadow-sm'>
         표시할 데이터가 없습니다.
       </div>
     );

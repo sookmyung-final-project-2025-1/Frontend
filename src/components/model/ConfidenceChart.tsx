@@ -59,12 +59,14 @@ export default function ConfidenceChart({
   const currentScore = data?.currentConfidenceScore;
 
   return (
-    <div className='rounded-2xl border border-slate-800 bg-slate-900/40'>
+    <div className='rounded-2xl border border-[#0E2975] bg-white shadow-sm'>
       <div className='p-4'>
-        <div className='flex items-center justify-between mb-2'>
-          <div className='text-sm text-slate-300'>Confidence Score 추이</div>
+        <div className='mb-2 flex items-center justify-between'>
+          <div className='text-sm font-semibold text-slate-900'>
+            Confidence Score 추이
+          </div>
           {typeof currentScore === 'number' && (
-            <div className='text-xs px-2 py-1 rounded bg-slate-800 border border-slate-700 text-slate-200'>
+            <div className='rounded border border-blue-200 bg-blue-50 px-2 py-1 text-xs text-blue-700'>
               현재: {(currentScore * 100).toFixed(1)}%
             </div>
           )}
@@ -72,15 +74,15 @@ export default function ConfidenceChart({
 
         <div className='h-64'>
           {isLoading ? (
-            <div className='h-full flex items-center justify-center text-slate-400'>
+            <div className='flex h-full items-center justify-center text-slate-500'>
               불러오는 중…
             </div>
           ) : error ? (
-            <div className='h-full flex items-center justify-center text-red-400'>
+            <div className='flex h-full items-center justify-center text-red-600'>
               데이터를 불러오지 못했습니다.
             </div>
           ) : (chartData?.length ?? 0) === 0 ? (
-            <div className='h-full flex items-center justify-center text-slate-500 text-sm'>
+            <div className='flex h-full items-center justify-center text-sm text-slate-600'>
               표시할 데이터가 없습니다.
             </div>
           ) : (
@@ -89,20 +91,28 @@ export default function ConfidenceChart({
                 data={chartData}
                 margin={{ top: 8, right: 12, left: 12, bottom: 8 }}
               >
-                <CartesianGrid strokeDasharray='3 3' stroke='#374151' />
-                <XAxis dataKey='x' stroke='#9CA3AF' fontSize={12} />
+                <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
+                <XAxis
+                  dataKey='x'
+                  stroke='#94A3B8'
+                  fontSize={12}
+                  tick={{ fill: '#64748B' }}
+                />
                 <YAxis
                   domain={[0, 1]}
-                  stroke='#9CA3AF'
+                  stroke='#94A3B8'
                   fontSize={12}
+                  tick={{ fill: '#64748B' }}
                   tickFormatter={(v) => `${Math.round((v as number) * 100)}%`}
                   width={48}
                 />
                 <Tooltip
-                  labelStyle={{ color: '#cbd5e1' }}
+                  labelStyle={{ color: '#64748B' }}
                   contentStyle={{
-                    background: '#0f172a',
-                    border: '1px solid #334155',
+                    background: '#ffffff',
+                    border: '1px solid #E5E7EB',
+                    borderRadius: '8px',
+                    color: '#0f172a',
                   }}
                   formatter={(value, name, entry) => {
                     if (entry && entry.dataKey === 'score') {
@@ -123,7 +133,7 @@ export default function ConfidenceChart({
                     label={{
                       value: `현재 ${(currentScore * 100).toFixed(1)}%`,
                       position: 'insideTopRight',
-                      fill: '#F59E0B',
+                      fill: '#B45309',
                     }}
                   />
                 )}

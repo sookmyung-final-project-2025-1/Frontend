@@ -57,11 +57,11 @@ function KpiCards({ kpi }: { kpi?: Kpi | null }) {
       {items.map((k, i) => (
         <div
           key={i}
-          className='rounded-2xl border border-slate-800 bg-slate-900/40 h-full'
+          className='rounded-2xl border border-[#0E2975] bg-white h-full shadow-sm'
         >
-          <div className='h-full p-5 flex justify-between'>
-            <div className='text-sm text-slate-400'>{k.label}</div>
-            <div className='text-xl mt-1 text-slate-100'>{k.value}</div>
+          <div className='flex h-full justify-between p-5'>
+            <div className='text-sm text-slate-600'>{k.label}</div>
+            <div className='mt-1 text-xl text-slate-900'>{k.value}</div>
           </div>
         </div>
       ))}
@@ -90,31 +90,31 @@ export default function KpiPanel() {
   });
 
   return (
-    <section className='bg-slate-900/40 border border-slate-800 rounded-xl p-6 space-y-6'>
+    <section className='space-y-6 rounded-xl border border-[#0E2975] bg-white p-6 shadow-sm'>
       {/* 컨트롤 바 */}
       <div className='flex flex-col md:flex-row md:items-end gap-3'>
         <div className='flex-1'>
-          <label className='block text-sm mb-1 text-slate-300'>시작 일자</label>
+          <label className='mb-1 block text-sm text-slate-600'>시작 일자</label>
           <input
             type='date'
             value={startLocal}
             onChange={(e) => setStartLocal(e.target.value)}
-            className='w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-500/60 focus:border-slate-500'
+            className='w-full rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
           />
         </div>
         <div className='flex-1'>
-          <label className='block text-sm mb-1 text-slate-300'>종료 일자</label>
+          <label className='mb-1 block text-sm text-slate-600'>종료 일자</label>
           <input
             type='date'
             value={endLocal}
             onChange={(e) => setEndLocal(e.target.value)}
-            className='w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-500/60 focus:border-slate-500'
+            className='w-full rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
           />
         </div>
 
         <button
           onClick={() => kpiQ.refetch()}
-          className='inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-slate-200 hover:bg-slate-700 h-[42px]'
+          className='inline-flex h-[42px] items-center gap-2 rounded-lg border border-blue-500 bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600'
           title='새로고침'
         >
           <RefreshCw
@@ -125,14 +125,14 @@ export default function KpiPanel() {
       </div>
 
       {/* 상태 텍스트 */}
-      <div className='text-xs text-slate-400'>
+      <div className='text-xs text-slate-500'>
         범위: {startLocal} ~ {endLocal}{' '}
         {kpiQ.isFetching ? '(불러오는 중…)' : ''}
       </div>
 
       {/* 카드 */}
       {kpiQ.error ? (
-        <div className='rounded-xl border border-red-700 bg-red-900/20 text-red-200 p-4 text-sm'>
+        <div className='rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 shadow-sm'>
           KPI 데이터를 불러오지 못했습니다.
         </div>
       ) : (

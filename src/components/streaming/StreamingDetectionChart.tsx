@@ -158,9 +158,9 @@ export default function StreamingDetectionChart({
   const showBadge = connectionStatus !== 'connected';
 
   return (
-    <div className='relative rounded-xl border border-slate-700 bg-slate-900 p-4 space-y-6'>
+    <div className='relative space-y-6 rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
       {showBadge && (
-        <div className='absolute right-4 top-4 z-10 rounded-full border border-yellow-600/40 bg-yellow-900/30 px-3 py-1 text-xs text-yellow-200'>
+        <div className='absolute right-4 top-4 z-10 rounded-full border border-yellow-200 bg-yellow-50 px-3 py-1 text-xs text-yellow-700'>
           {connectionStatus === 'connecting'
             ? '실시간 연동 중…'
             : connectionStatus === 'error'
@@ -170,31 +170,33 @@ export default function StreamingDetectionChart({
       )}
 
       <div className='flex items-center justify-between'>
-        <h3 className='text-lg font-semibold'>실시간 사기 탐지 결과</h3>
-        <div className='text-sm text-slate-400'>
+        <h3 className='text-lg font-semibold text-slate-900'>
+          실시간 사기 탐지 결과
+        </h3>
+        <div className='text-sm text-slate-600'>
           {visibleData.length} / {data.length} 포인트 ·{' '}
           <span>{formatVirtualTime(currentVirtualTime)}</span>
           {resolvedPlaying && (
-            <span className='ml-2 text-emerald-400'>▶ {speedMultiplier}x</span>
+            <span className='ml-2 text-emerald-600'>▶ {speedMultiplier}x</span>
           )}
         </div>
       </div>
 
       <div>
-        <h4 className='mb-2 text-sm text-slate-300'>Score · Threshold</h4>
+        <h4 className='mb-2 text-sm text-slate-600'>Score · Threshold</h4>
         <div className='h-56'>
           <ResponsiveContainer width='100%' height='100%'>
             <LineChart
               data={chartData}
               margin={{ top: 5, right: 16, left: 0, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray='3 3' stroke='#374151' />
+              <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
               <XAxis
                 type='number'
                 dataKey='timeMs'
                 domain={['dataMin', 'dataMax']}
-                tick={{ fontSize: 12, fill: '#9CA3AF' }}
-                stroke='#6B7280'
+                tick={{ fontSize: 12, fill: '#64748B' }}
+                stroke='#94A3B8'
                 tickFormatter={(value) =>
                   new Date(value).toLocaleTimeString('ko-KR', {
                     hour12: false,
@@ -203,15 +205,17 @@ export default function StreamingDetectionChart({
               />
               <YAxis
                 domain={[0, 1]}
-                tick={{ fontSize: 12, fill: '#9CA3AF' }}
-                stroke='#6B7280'
+                tick={{ fontSize: 12, fill: '#64748B' }}
+                stroke='#94A3B8'
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#1F2937',
-                  border: '1px solid #374151',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #E5E7EB',
                   borderRadius: '8px',
+                  color: '#0f172a',
                 }}
+                labelStyle={{ color: '#64748B' }}
                 labelFormatter={(value) =>
                   new Date(value as number).toLocaleTimeString('ko-KR', {
                     hour12: false,
@@ -224,7 +228,12 @@ export default function StreamingDetectionChart({
                 stroke='#EF4444'
                 strokeOpacity={0.7}
                 strokeDasharray='5 5'
-                label={{ value: `Threshold ${threshold}`, position: 'right' }}
+                label={{
+                  value: `Threshold ${threshold}`,
+                  position: 'right',
+                  fill: '#EF4444',
+                  fontSize: 11,
+                }}
               />
               <Line
                 type='monotone'
@@ -257,20 +266,20 @@ export default function StreamingDetectionChart({
       </div>
 
       <div>
-        <h4 className='mb-2 text-sm text-slate-300'>모델별 기여도</h4>
+        <h4 className='mb-2 text-sm text-slate-600'>모델별 기여도</h4>
         <div className='h-48'>
           <ResponsiveContainer width='100%' height='100%'>
             <LineChart
               data={chartData}
               margin={{ top: 5, right: 16, left: 0, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray='3 3' stroke='#374151' />
+              <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
               <XAxis
                 type='number'
                 dataKey='timeMs'
                 domain={['dataMin', 'dataMax']}
-                tick={{ fontSize: 12, fill: '#9CA3AF' }}
-                stroke='#6B7280'
+                tick={{ fontSize: 12, fill: '#64748B' }}
+                stroke='#94A3B8'
                 tickFormatter={(value) =>
                   new Date(value).toLocaleTimeString('ko-KR', {
                     hour12: false,
@@ -279,15 +288,17 @@ export default function StreamingDetectionChart({
               />
               <YAxis
                 domain={[0, 1]}
-                tick={{ fontSize: 12, fill: '#9CA3AF' }}
-                stroke='#6B7280'
+                tick={{ fontSize: 12, fill: '#64748B' }}
+                stroke='#94A3B8'
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#1F2937',
-                  border: '1px solid #374151',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #E5E7EB',
                   borderRadius: '8px',
+                  color: '#0f172a',
                 }}
+                labelStyle={{ color: '#64748B' }}
                 labelFormatter={(value) =>
                   new Date(value as number).toLocaleTimeString('ko-KR', {
                     hour12: false,

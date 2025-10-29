@@ -38,19 +38,19 @@ export default function ReportDetailDrawer({
 
   return (
     <div
-      className={`fixed inset-y-0 right-0 w-full sm:w-[480px] bg-slate-900 border-l border-slate-800 transform transition-transform duration-200 ${
+      className={`fixed inset-y-0 right-0 w-full sm:w-[480px] bg-white border-l border-[#0E2975] shadow-xl transform transition-transform duration-200 ${
         open ? 'translate-x-0' : 'translate-x-full'
       } z-50`}
       aria-hidden={!open}
     >
-      <div className='flex items-center justify-between p-4 border-b border-slate-800'>
+      <div className='flex items-center justify-between bg-white p-4 border-b border-[#0E2975]'>
         <div className='flex items-center gap-2'>
-          <Flag className='w-5 h-5 text-slate-300' />
+          <Flag className='w-5 h-5 text-slate-500' />
           <h3 className='text-lg font-semibold'>신고 상세</h3>
         </div>
         <button
           onClick={onClose}
-          className='p-2 rounded-lg hover:bg-slate-800 text-slate-300'
+          className='p-2 rounded-lg text-slate-500 transition hover:bg-gray-100'
           aria-label='close'
         >
           <X className='w-5 h-5' />
@@ -59,7 +59,7 @@ export default function ReportDetailDrawer({
 
       <div className='p-4 space-y-4 overflow-y-auto h-[calc(100%-64px)]'>
         {!data && isLoading && (
-          <div className='text-slate-400'>불러오는 중...</div>
+          <div className='text-slate-500'>불러오는 중...</div>
         )}
 
         {data && (
@@ -77,9 +77,9 @@ export default function ReportDetailDrawer({
             <KV label='Reason' value={data.reason} />
             <KV label='Description' value={data.description} />
 
-            <div className='border-t border-slate-800 pt-3'>
-              <div className='mb-2 text-sm text-slate-400'>거래 상세</div>
-              <div className='text-sm text-slate-300 grid grid-cols-2 gap-2'>
+            <div className='border-t border-[#0E2975] pt-3'>
+              <div className='mb-2 text-sm text-slate-600'>거래 상세</div>
+              <div className='grid grid-cols-2 gap-2 text-sm text-slate-700'>
                 <KV
                   label='amount'
                   value={data.transactionDetails?.amount}
@@ -103,11 +103,11 @@ export default function ReportDetailDrawer({
               </div>
             </div>
 
-            <div className='border-t border-slate-800 pt-3 space-y-2'>
-              <div className='text-sm text-slate-400'>우선순위 변경</div>
+            <div className='border-t border-[#0E2975] pt-3 space-y-2'>
+              <div className='text-sm text-slate-600'>우선순위 변경</div>
               <div className='flex items-center gap-2'>
                 <select
-                  className='bg-slate-800 border border-slate-700 rounded px-2 py-1 text-slate-100'
+                  className='rounded border border-[#0E2975] bg-white px-2 py-1 text-slate-800 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
                   value={newPriority}
                   onChange={(e) =>
                     setNewPriority(e.target.value as PriorityLevel)
@@ -121,7 +121,7 @@ export default function ReportDetailDrawer({
                 </select>
                 <button
                   onClick={setPriority}
-                  className='px-3 py-1.5 rounded bg-blue-600 text-white hover:bg-blue-700'
+                  className='px-3 py-1.5 rounded bg-blue-500 text-white transition hover:bg-blue-600'
                 >
                   적용
                 </button>
@@ -129,7 +129,7 @@ export default function ReportDetailDrawer({
             </div>
 
             {data.message && (
-              <div className='text-xs text-slate-400 border-t border-slate-800 pt-3'>
+              <div className='border-t border-[#0E2975] pt-3 text-xs text-slate-500'>
                 서버 메시지: {data.message}
               </div>
             )}
@@ -152,8 +152,8 @@ function KV({
 }) {
   return (
     <div className={`text-sm ${inline ? 'flex items-center gap-2' : ''}`}>
-      <span className='text-slate-400'>{label}:</span>{' '}
-      <span className='text-slate-200'>{value ?? '-'}</span>
+      <span className='text-slate-600'>{label}:</span>{' '}
+      <span className='text-slate-800'>{value ?? '-'}</span>
     </div>
   );
 }

@@ -77,10 +77,10 @@ export default function TransactionPage() {
     : ((transactionData as any)?.totalElements ?? transactions.length);
 
   return (
-    <div className='space-y-6 bg-slate-900/40 border border-slate-800 rounded-xl p-8'>
+    <div className='space-y-6 rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
       <div className='flex items-center justify-between'>
-        <h1 className='text-2xl font-bold text-slate-100'>거래 내역</h1>
-        <div className='text-sm text-slate-400'>총 {totalElements}건</div>
+        <h1 className='text-2xl font-bold text-slate-900'>거래 내역</h1>
+        <div className='text-sm text-slate-800'>총 {totalElements}건</div>
       </div>
 
       <TransactionFilters
@@ -103,8 +103,7 @@ export default function TransactionPage() {
         onPageableChange={handlePageableChange}
         showPreview={false} // 필요 시 true
       />
-
-      <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-8'>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
         <TransactionsTable
           data={transactions}
           isLoading={isLoading}

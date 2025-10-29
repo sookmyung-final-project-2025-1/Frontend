@@ -71,16 +71,18 @@ export default function FeatureImportanceChart({
       : null;
 
   return (
-    <div className='rounded-2xl border border-slate-800 bg-slate-900/40'>
+    <div className='rounded-2xl border border-[#0E2975] bg-white shadow-sm'>
       <div className='p-4'>
-        <div className='text-sm text-slate-300'>Feature Importance</div>
+        <div className='text-sm font-semibold text-slate-900'>
+          Feature Importance
+        </div>
         {subtitle && (
-          <div className='text-xs text-slate-500 mt-0.5'>{subtitle}</div>
+          <div className='mt-0.5 text-xs text-slate-500'>{subtitle}</div>
         )}
 
-        <div className='h-72 mt-2'>
+        <div className='mt-2 h-72'>
           {chartData.length === 0 ? (
-            <div className='h-full flex items-center justify-center text-slate-500 text-sm'>
+            <div className='flex h-full items-center justify-center text-sm text-slate-500'>
               표시할 데이터가 없습니다.
             </div>
           ) : (
@@ -91,14 +93,14 @@ export default function FeatureImportanceChart({
                 margin={{ top: 15, right: 35, bottom: 2, left: 5 }}
                 barCategoryGap={12}
               >
-                <CartesianGrid strokeDasharray='3 3' stroke='#374151' />
+                <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
 
                 <YAxis
                   type='category'
                   dataKey='feature'
                   width={yAxisWidth}
                   interval={0}
-                  tick={{ fill: '#cbd5e1', fontSize: 12 }}
+                  tick={{ fill: '#475569', fontSize: 12 }}
                   tickMargin={8}
                   axisLine={false}
                   tickLine={false}
@@ -108,14 +110,16 @@ export default function FeatureImportanceChart({
                   type='number'
                   domain={[0, xMax]}
                   tickFormatter={(v) => `${Math.round((v as number) * 100)}%`}
-                  tick={{ fill: '#cbd5e1', fontSize: 12 }}
+                  tick={{ fill: '#64748B', fontSize: 12 }}
                 />
 
                 <Tooltip
-                  labelStyle={{ color: '#cbd5e1' }}
+                  labelStyle={{ color: '#64748B' }}
                   contentStyle={{
-                    background: '#0f172a',
-                    border: '1px solid #334155',
+                    background: '#ffffff',
+                    border: '1px solid #E5E7EB',
+                    borderRadius: '8px',
+                    color: '#0f172a',
                   }}
                   formatter={(value, name, entry) => {
                     if (entry?.dataKey === 'pct') {
@@ -145,11 +149,11 @@ export default function FeatureImportanceChart({
                     formatter={(label: ReactNode) => {
                       const v =
                         typeof label === 'number' ? label : Number(label);
-                      return Number.isFinite(v)
-                        ? `${(v * 100).toFixed(1)}%`
-                        : (label as any);
-                    }}
-                    fill='#e2e8f0'
+                    return Number.isFinite(v)
+                      ? `${(v * 100).toFixed(1)}%`
+                      : (label as any);
+                  }}
+                    fill='#1f2937'
                     fontSize={11}
                   />
                 </Bar>

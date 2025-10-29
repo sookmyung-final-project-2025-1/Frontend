@@ -29,7 +29,7 @@ export default function TransactionDetailView({
       <div className='flex items-center justify-between'>
         <Link
           href='/dashboard/transactions'
-          className='text-sm px-3 py-1.5 rounded-lg border border-slate-700 bg-slate-800 text-slate-100 hover:bg-slate-700'
+          className='rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm text-slate-700 transition hover:bg-gray-100'
         >
           ← 목록으로
         </Link>
@@ -37,17 +37,17 @@ export default function TransactionDetailView({
       </div>
 
       {/* 로딩/에러 컨테이너 */}
-      <div className='rounded-xl border border-slate-800 bg-slate-900/40 overflow-hidden min-h-[200px]'>
+      <div className='min-h-[200px] overflow-hidden rounded-xl border border-[#0E2975] bg-white shadow-sm'>
         {error ? (
-          <div className='flex items-center justify-center py-16 text-red-400'>
+          <div className='flex items-center justify-center py-16 text-red-600'>
             데이터를 불러오지 못했습니다.
           </div>
         ) : isLoading && !data ? (
-          <div className='flex items-center justify-center py-16 text-slate-400'>
+          <div className='flex items-center justify-center py-16 text-slate-500'>
             불러오는 중…
           </div>
         ) : !data ? (
-          <div className='flex items-center justify-center py-16 text-slate-400'>
+          <div className='flex items-center justify-center py-16 text-slate-500'>
             데이터가 없습니다.
           </div>
         ) : (

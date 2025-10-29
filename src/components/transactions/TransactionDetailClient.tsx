@@ -29,10 +29,10 @@ export default function TransactionDetailClient({
   };
 
   return (
-    <div className='space-y-6 bg-slate-900/40 border border-slate-800 rounded-xl p-8'>
+    <div className='space-y-6 rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
       <div className='flex items-center justify-between'>
-        <h1 className='text-2xl font-bold text-slate-100'>거래 상세</h1>
-        <div className='text-sm text-slate-400'>
+        <h1 className='text-2xl font-bold text-slate-900'>거래 상세</h1>
+        <div className='text-sm text-slate-800'>
           Transaction ID: {transactionId}
         </div>
       </div>

@@ -42,27 +42,29 @@ export default function ChartsGrid({ chartData }: Props) {
     fraudRatePct: Number(d.fraudRatePct ?? 0),
   }));
 
+  const axisTick = { fill: '#64748B', fontSize: 12 };
+
   return (
     <>
       {/* 1) 사기 거래 트렌드 */}
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
-        <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
-          <h4 className='text-slate-300 font-medium mb-2'>사기 거래 트렌드</h4>
+      <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
+        <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
+          <h4 className='mb-2 font-medium text-slate-700'>사기 거래 트렌드</h4>
           <div className='h-80'>
             <ResponsiveContainer width='100%' height='100%'>
               <LineChart data={data}>
-                <CartesianGrid strokeDasharray='3 3' stroke='#334155' />
+                <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
                 <XAxis
                   dataKey='time'
                   tickFormatter={toMD}
                   allowDuplicatedCategory={false}
-                  stroke='#64748b'
-                  fontSize={12}
+                  stroke='#94A3B8'
+                  tick={axisTick}
                   interval='preserveStartEnd'
                   tickMargin={8}
                   minTickGap={12}
                 />
-                <YAxis allowDecimals={false} stroke='#64748b' fontSize={12} />
+                <YAxis allowDecimals={false} stroke='#94A3B8' tick={axisTick} />
                 <Tooltip
                   formatter={(v: any) => [
                     Number(v).toLocaleString(),
@@ -70,11 +72,12 @@ export default function ChartsGrid({ chartData }: Props) {
                   ]}
                   labelFormatter={(label) => `날짜: ${toMD(String(label))}`}
                   contentStyle={{
-                    backgroundColor: '#1e293b',
-                    border: '1px solid #334155',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #E5E7EB',
                     borderRadius: 8,
-                    color: '#e2e8f0',
+                    color: '#0f172a',
                   }}
+                  labelStyle={{ color: '#64748B' }}
                 />
                 <Legend />
                 <Line
@@ -92,23 +95,23 @@ export default function ChartsGrid({ chartData }: Props) {
         </div>
 
         {/* 2) 전체 거래량 */}
-        <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
-          <h4 className='text-slate-300 font-medium mb-2'>전체 거래량</h4>
+        <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
+          <h4 className='mb-2 font-medium text-slate-700'>전체 거래량</h4>
           <div className='h-80'>
             <ResponsiveContainer width='100%' height='100%'>
               <AreaChart data={data}>
-                <CartesianGrid strokeDasharray='3 3' stroke='#334155' />
+                <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
                 <XAxis
                   dataKey='time'
                   tickFormatter={toMD}
                   allowDuplicatedCategory={false}
-                  stroke='#64748b'
-                  fontSize={12}
+                  stroke='#94A3B8'
+                  tick={axisTick}
                   interval='preserveStartEnd'
                   tickMargin={8}
                   minTickGap={12}
                 />
-                <YAxis allowDecimals={false} stroke='#64748b' fontSize={12} />
+                <YAxis allowDecimals={false} stroke='#94A3B8' tick={axisTick} />
                 <Tooltip
                   formatter={(v: any) => [
                     Number(v).toLocaleString(),
@@ -116,11 +119,12 @@ export default function ChartsGrid({ chartData }: Props) {
                   ]}
                   labelFormatter={(label) => `날짜: ${toMD(String(label))}`}
                   contentStyle={{
-                    backgroundColor: '#1e293b',
-                    border: '1px solid #334155',
+                    backgroundColor: '#ffffff',
+                    border: '1px solid #E5E7EB',
                     borderRadius: 8,
-                    color: '#e2e8f0',
+                    color: '#0f172a',
                   }}
+                  labelStyle={{ color: '#64748B' }}
                 />
                 <Area
                   type='monotone'
@@ -139,25 +143,25 @@ export default function ChartsGrid({ chartData }: Props) {
       </div>
 
       {/* 3) 사기 비율 추이 (0~100%) */}
-      <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4 mt-6'>
-        <h4 className='text-slate-300 font-medium mb-2'>사기 비율 추이</h4>
+      <div className='mt-6 rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
+        <h4 className='mb-2 font-medium text-slate-700'>사기 비율 추이</h4>
         <div className='h-96'>
           <ResponsiveContainer width='100%' height='100%'>
             <LineChart data={data}>
-              <CartesianGrid strokeDasharray='3 3' stroke='#334155' />
+              <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
               <XAxis
                 dataKey='time'
                 tickFormatter={toMD}
                 allowDuplicatedCategory={false}
-                stroke='#64748b'
-                fontSize={12}
+                stroke='#94A3B8'
+                tick={axisTick}
                 interval='preserveStartEnd'
                 tickMargin={8}
                 minTickGap={12}
               />
               <YAxis
-                stroke='#64748b'
-                fontSize={12}
+                stroke='#94A3B8'
+                tick={axisTick}
                 domain={[0, 100]}
                 tickFormatter={(v) => `${Number(v).toFixed(0)}%`}
               />
@@ -165,11 +169,12 @@ export default function ChartsGrid({ chartData }: Props) {
                 formatter={(v: any) => [formatRate(Number(v)), '사기 비율']}
                 labelFormatter={(label) => `날짜: ${toMD(String(label))}`}
                 contentStyle={{
-                  backgroundColor: '#1e293b',
-                  border: '1px solid #334155',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #E5E7EB',
                   borderRadius: 8,
-                  color: '#e2e8f0',
+                  color: '#0f172a',
                 }}
+                labelStyle={{ color: '#64748B' }}
               />
               <Legend />
               <Line

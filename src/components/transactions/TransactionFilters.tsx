@@ -75,8 +75,8 @@ export default function TransactionFilters({
   showPreview,
 }: Props) {
   const inputCls =
-    'w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100 placeholder:text-slate-400 ' +
-    'focus:outline-none focus:ring-2 focus:ring-slate-500/60 focus:border-slate-500';
+    'w-full rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-900 placeholder:text-slate-400 shadow-sm ' +
+    'focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20';
 
   // 정렬 UI용 파생 상태 (pageable.sort는 ["field,dir"] 형태의 0~1개만 사용한다고 가정)
   const currentSort = pageable.sort?.[0] ?? '';
@@ -109,12 +109,12 @@ export default function TransactionFilters({
   };
 
   return (
-    <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-8 space-y-4'>
-      <h2 className='text-lg font-semibold text-slate-200'>필터</h2>
+    <div className='space-y-4 rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
+      <h2 className='text-lg font-semibold text-slate-900'>필터</h2>
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>사용자 ID</label>
+          <label className='mb-1 block text-sm text-slate-600'>사용자 ID</label>
           <input
             type='text'
             value={filters.userId || ''}
@@ -125,7 +125,7 @@ export default function TransactionFilters({
         </div>
 
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>가맹점</label>
+          <label className='mb-1 block text-sm text-slate-600'>가맹점</label>
           <input
             type='text'
             value={filters.merchant || ''}
@@ -136,7 +136,7 @@ export default function TransactionFilters({
         </div>
 
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>카테고리</label>
+          <label className='mb-1 block text-sm text-slate-600'>카테고리</label>
           <input
             type='text'
             value={filters.category || ''}
@@ -147,7 +147,7 @@ export default function TransactionFilters({
         </div>
 
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>최소 금액</label>
+          <label className='mb-1 block text-sm text-slate-600'>최소 금액</label>
           <input
             type='number'
             value={filters.minAmount ?? ''}
@@ -163,7 +163,7 @@ export default function TransactionFilters({
         </div>
 
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>최대 금액</label>
+          <label className='mb-1 block text-sm text-slate-600'>최대 금액</label>
           <input
             type='number'
             value={filters.maxAmount ?? ''}
@@ -179,7 +179,7 @@ export default function TransactionFilters({
         </div>
 
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>사기 여부</label>
+          <label className='mb-1 block text-sm text-slate-600'>사기 여부</label>
           <select
             value={filters.isFraud === undefined ? '' : String(filters.isFraud)}
             onChange={(e) =>
@@ -197,7 +197,7 @@ export default function TransactionFilters({
         </div>
 
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>시작 시간</label>
+          <label className='mb-1 block text-sm text-slate-600'>시작 시간</label>
           <input
             type='datetime-local'
             value={filters.startTime || ''}
@@ -210,7 +210,7 @@ export default function TransactionFilters({
         </div>
 
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>종료 시간</label>
+          <label className='mb-1 block text-sm text-slate-600'>종료 시간</label>
           <input
             type='datetime-local'
             value={filters.endTime || ''}
@@ -224,9 +224,9 @@ export default function TransactionFilters({
       </div>
 
       {/* 페이지네이션 + 정렬 */}
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
+      <div className='grid grid-cols-1 gap-3 md:grid-cols-3'>
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>페이지</label>
+          <label className='mb-1 block text-sm text-slate-600'>페이지</label>
           <input
             type='number'
             min={0}
@@ -241,9 +241,7 @@ export default function TransactionFilters({
           />
         </div>
         <div>
-          <label className='block text-sm mb-1 text-slate-300'>
-            페이지 크기
-          </label>
+          <label className='mb-1 block text-sm text-slate-600'>페이지 크기</label>
           <input
             type='number'
             min={1}
@@ -261,9 +259,7 @@ export default function TransactionFilters({
         {/* ✅ 정렬 UI */}
         <div className='grid grid-cols-2 gap-2'>
           <div>
-            <label className='block text-sm mb-1 text-slate-300'>
-              정렬 필드
-            </label>
+            <label className='mb-1 block text-sm text-slate-600'>정렬 필드</label>
             <select
               value={sortField || ''}
               onChange={(e) => handleSortFieldChange(e.target.value)}
@@ -280,9 +276,7 @@ export default function TransactionFilters({
             </select>
           </div>
           <div>
-            <label className='block text-sm mb-1 text-slate-300'>
-              정렬 방향
-            </label>
+            <label className='mb-1 block text-sm text-slate-600'>정렬 방향</label>
             <select
               value={(sortDir as 'asc' | 'desc') || 'desc'}
               onChange={(e) =>
@@ -307,7 +301,7 @@ export default function TransactionFilters({
         <div className='flex gap-2'>
           <button
             onClick={resetAll}
-            className='px-4 py-2 text-sm rounded-lg border border-slate-700 bg-slate-800 text-slate-100 hover:bg-slate-700'
+            className='rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-slate-700 transition hover:bg-gray-100'
           >
             필터 초기화
           </button>

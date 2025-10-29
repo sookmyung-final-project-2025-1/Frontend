@@ -68,10 +68,13 @@ export default function Login() {
           <button
             type='submit'
             disabled={!isFilled || isPending}
-            className={`w-full h-[50px] rounded-[10px] font-semibold text-[#ffffff]
-              flex items-center justify-center gap-2
-              ${isPending ? 'bg-slate-500' : isFilled ? 'bg-blue-50' : 'bg-[#E5E5E5]'}
-            `}
+            className={`flex h-[50px] w-full items-center justify-center gap-2 rounded-[10px] font-semibold transition ${
+              isPending
+                ? 'bg-blue-400 text-white'
+                : isFilled
+                  ? 'bg-blue-500 text-white hover:bg-blue-600'
+                  : 'bg-gray-300 text-slate-500'
+            }`}
           >
             {isPending && (
               <svg

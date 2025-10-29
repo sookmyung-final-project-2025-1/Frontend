@@ -20,10 +20,10 @@ export default function StatsCards({
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
       {/* 전체 거래 건수 */}
-      <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
         <div className='flex items-center justify-between'>
           <div>
-            <p className='text-sm text-slate-400'>전체 거래 건수</p>
+            <p className='text-sm text-slate-600'>전체 거래 건수</p>
             <p className='text-2xl font-semibold' style={{ color: '#A78BFA' }}>
               {totalTransactions.toLocaleString()}건
               {rangeLabel ? ` (${rangeLabel})` : ''}
@@ -34,10 +34,10 @@ export default function StatsCards({
       </div>
 
       {/* 총 사기 건수 */}
-      <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
         <div className='flex items-center justify-between'>
           <div>
-            <p className='text-sm text-slate-400'>총 사기 건수</p>
+            <p className='text-sm text-slate-600'>총 사기 건수</p>
             <p className='text-2xl font-semibold' style={{ color: '#F87171' }}>
               {totalFraud.toLocaleString()}건
             </p>
@@ -49,10 +49,10 @@ export default function StatsCards({
       {/* (요청에 따라 평균/트렌드 카드는 제거) */}
 
       {/* 사기 비율 */}
-      <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
         <div className='flex items-center justify-between'>
           <div>
-            <p className='text-sm text-slate-400'>사기 비율</p>
+            <p className='text-sm text-slate-600'>사기 비율</p>
             <p className='text-2xl font-semibold' style={{ color: '#34D399' }}>
               {(fraudRatio * 100).toFixed(2)}%
             </p>

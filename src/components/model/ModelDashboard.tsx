@@ -54,11 +54,11 @@ export default function ModelDashboard() {
   };
 
   return (
-    <div className='space-y-8 bg-slate-900/40 border border-slate-800 rounded-xl p-8'>
+    <div className='space-y-8 rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
       {/* 헤더 */}
       <div>
-        <h1 className='text-2xl font-semibold'>모델 관리</h1>
-        <p className='text-sm text-slate-400'>
+        <h1 className='text-2xl font-semibold text-slate-900'>모델 관리</h1>
+        <p className='text-sm text-slate-800'>
           버전 배포 / 서비스 재로딩 / 메타데이터 확인
         </p>
       </div>
@@ -88,10 +88,10 @@ export default function ModelDashboard() {
       {/* 액션 + 버전 선택 */}
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-4'>
         {/* 배포/재로딩 액션 */}
-        <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4 space-y-4'>
+        <div className='space-y-4 rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
           <div className='flex items-center justify-between'>
             <h3 className='font-semibold'>액션</h3>
-            <span className='text-xs text-slate-400'>
+            <span className='text-xs text-slate-600'>
               선택 버전: {selected || '-'}
             </span>
           </div>
@@ -100,7 +100,7 @@ export default function ModelDashboard() {
             <button
               onClick={handleDeploy}
               disabled={!canDeploy}
-              className='px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50'
+              className='rounded-lg bg-blue-500 px-3 py-2 text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50'
               title={
                 selected === current
                   ? '현재 버전과 동일합니다'
@@ -113,27 +113,27 @@ export default function ModelDashboard() {
             <button
               onClick={handleReload}
               disabled={reloadM.isPending}
-              className='px-3 py-2 rounded-lg border border-slate-700 hover:bg-slate-800 text-slate-100 disabled:opacity-50 inline-flex items-center gap-2'
+              className='inline-flex items-center gap-2 rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-700 transition hover:bg-white/80 disabled:cursor-not-allowed disabled:opacity-50'
               title='모델 서비스 재로딩'
             >
-              <RefreshCw className='w-4 h-4' />
+              <RefreshCw className='h-4 w-4' />
               {reloadM.isPending ? '재로딩...' : '서비스 재로딩'}
             </button>
           </div>
 
           {(deployM.error || reloadM.error) && (
-            <p className='text-sm text-red-300'>
+            <p className='text-sm text-red-600'>
               작업 실패. 콘솔 로그를 확인하세요.
             </p>
           )}
         </div>
 
         {/* 버전 목록 */}
-        <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4 lg:col-span-2'>
-          <div className='flex items-center justify-between mb-3'>
+        <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm lg:col-span-2'>
+          <div className='mb-3 flex items-center justify-between'>
             <h3 className='font-semibold'>사용 가능한 버전</h3>
             {versionsQ.isLoading && (
-              <span className='text-xs text-slate-400'>불러오는 중...</span>
+              <span className='text-xs text-slate-500'>불러오는 중...</span>
             )}
           </div>
 
@@ -141,10 +141,10 @@ export default function ModelDashboard() {
             {list.map((ver) => (
               <label
                 key={ver}
-                className={`cursor-pointer border rounded-lg px-3 py-2 text-sm ${
+                className={`cursor-pointer rounded-lg border px-3 py-2 text-sm transition ${
                   ver === selected
-                    ? 'border-blue-500 bg-blue-500/10'
-                    : 'border-slate-700 hover:bg-slate-800/60'
+                    ? 'border-blue-500 bg-blue-50'
+                    : 'border-[#0E2975] hover:bg-white/80'
                 }`}
               >
                 <input
@@ -157,15 +157,15 @@ export default function ModelDashboard() {
                 />
                 {ver}
                 {ver === current && (
-                  <span className='ml-2 text-xs text-green-400'>현재</span>
+                  <span className='ml-2 text-xs text-green-600'>현재</span>
                 )}
                 {ver === latest && (
-                  <span className='ml-2 text-xs text-amber-400'>최신</span>
+                  <span className='ml-2 text-xs text-amber-600'>최신</span>
                 )}
               </label>
             ))}
             {list.length === 0 && !versionsQ.isLoading && (
-              <div className='text-slate-400 text-sm'>
+              <div className='text-sm text-slate-500'>
                 표시할 버전이 없습니다.
               </div>
             )}
@@ -174,33 +174,33 @@ export default function ModelDashboard() {
       </div>
 
       {/* 메타데이터 패널 */}
-      <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
-        <div className='flex items-center justify-between mb-3'>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
+        <div className='mb-3 flex items-center justify-between'>
           <h3 className='font-semibold'>메타데이터</h3>
-          <span className='text-xs text-slate-400'>
+          <span className='text-xs text-slate-500'>
             {metadataQ.isLoading ? '불러오는 중...' : selected || '-'}
           </span>
         </div>
 
-        {!selected && <div className='text-slate-400'>버전을 선택하세요.</div>}
+        {!selected && <div className='text-slate-500'>버전을 선택하세요.</div>}
 
         {selected && (
           <>
             {metadataQ.error && (
-              <div className='text-red-300 text-sm'>
+              <div className='text-sm text-red-600'>
                 메타데이터를 불러오지 못했습니다.
               </div>
             )}
 
             {/* 서버가 어떤 형태를 주더라도 일단 보기 좋게 JSON으로 */}
             {metadataQ.data && (
-              <pre className='text-xs bg-slate-950/50 border border-slate-800 rounded-lg p-3 overflow-auto'>
+              <pre className='overflow-auto rounded-lg border border-[#0E2975] bg-gray-100 p-3 text-xs text-slate-800'>
                 {JSON.stringify(metadataQ.data, null, 2)}
               </pre>
             )}
 
             {!metadataQ.isLoading && !metadataQ.data && !metadataQ.error && (
-              <div className='text-slate-400'>데이터가 없습니다.</div>
+              <div className='text-slate-500'>데이터가 없습니다.</div>
             )}
           </>
         )}
@@ -223,15 +223,15 @@ function StatCard({
   loading?: boolean;
 }) {
   return (
-    <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
+    <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
       <div className='flex items-center justify-between'>
         <div>
-          <p className='text-sm text-slate-400'>{title}</p>
-          <p className='text-2xl font-semibold text-slate-100'>
+          <p className='text-sm text-slate-600'>{title}</p>
+          <p className='text-2xl font-semibold text-slate-900'>
             {loading ? '...' : value}
           </p>
         </div>
-        <div className='text-slate-400'>{icon}</div>
+        <div className='text-slate-500'>{icon}</div>
       </div>
     </div>
   );

@@ -88,12 +88,15 @@ function ScoreBar({ label, score }: { label: string; score?: number }) {
   const pct = Math.max(0, Math.min(100, Math.round(s * 100)));
   return (
     <div>
-      <div className='flex justify-between text-slate-300'>
+      <div className='flex justify-between text-slate-600'>
         <span>{label}</span>
-        <span className='text-slate-400'>{pct}%</span>
+        <span className='text-slate-500'>{pct}%</span>
       </div>
-      <div className='h-2 bg-slate-800 rounded-md overflow-hidden'>
-        <div className='h-full bg-slate-200' style={{ width: `${pct}%` }} />
+      <div className='h-2 overflow-hidden rounded-md bg-gray-200'>
+        <div
+          className='h-full bg-blue-500'
+          style={{ width: `${pct}%` }}
+        />
       </div>
     </div>
   );
@@ -231,7 +234,7 @@ export default function ModelPredictorPanel({
     embedded ? (
       <div className='relative'>{children}</div>
     ) : (
-      <section className='bg-slate-900/40 border border-slate-800 rounded-xl p-8 relative'>
+      <section className='relative rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
         {children}
       </section>
     );
@@ -239,18 +242,18 @@ export default function ModelPredictorPanel({
   return (
     <Container>
       <div className='flex items-center justify-between mb-6'>
-        <h3 className='text-xl font-semibold text-slate-200'>
+        <h3 className='text-xl font-semibold text-slate-900'>
           가중치 테스트 (앙상블 모델 예측)
         </h3>
         <div className='flex items-center gap-3'>
-          <div className='text-s text-slate-400 hidden md:block'>
+          <div className='hidden text-sm text-slate-600 md:block'>
             저장된 가중치 · LGBM {saveWeights?.lgbm} • XGB:{' '}
             {saveWeights?.xgboost} • CAT: {saveWeights?.catboost}
           </div>
           <button
             onClick={handlePredict}
             disabled={predictM.isPending}
-            className='px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50'
+            className='rounded-lg bg-blue-500 px-3 py-2 text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50'
             title='현재 가중치로 예측'
           >
             {predictM.isPending ? '예측 중…' : '현재 가중치로 예측'}
@@ -258,52 +261,52 @@ export default function ModelPredictorPanel({
         </div>
       </div>
 
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 bg-slate-900/40 border border-slate-800 rounded-xl p-8'>
+      <div className='grid grid-cols-1 gap-6 rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm lg:grid-cols-2'>
         {/* 좌: 요청 JSON */}
         <div>
-          <div className='text-sm text-slate-300 mb-2'>
+          <div className='text-sm text-slate-700 mb-2'>
             transactionRequest JSON
           </div>
           <textarea
             value={raw}
             onChange={(e) => setRaw(e.target.value)}
             spellCheck={false}
-            className='w-full h-64 rounded-lg border border-slate-800 bg-slate-950/40 p-3 font-mono text-xs text-slate-100'
+            className='h-64 w-full rounded-lg border border-[#0E2975] bg-white p-3 font-mono text-xs text-slate-900 shadow-sm'
             placeholder='{"transactionId":123, ...}'
           />
-          <p className='mt-2 text-xs text-slate-500'>
+          <p className='mt-2 text-xs text-slate-700'>
             샘플 트랜잭션 JSON을 붙여넣고 “현재 가중치로 예측”을 클릭하세요.
           </p>
         </div>
 
         {/* 우: 결과 */}
         <div className='space-y-3'>
-          <div className='text-sm text-slate-300'>결과</div>
+          <div className='text-sm text-slate-700'>결과</div>
 
           {!result && (
-            <div className='text-slate-500 text-sm border border-slate-800 rounded-lg p-4'>
+            <div className='text-sm text-slate-800 rounded-lg border border-[#0E2975] bg-white p-4 shadow-sm'>
               예측 결과가 여기에 표시됩니다.
             </div>
           )}
 
           {result && (
-            <div className='border border-slate-800 rounded-lg p-4 bg-slate-950/40'>
+            <div className='rounded-lg border border-[#0E2975] bg-white p-4 shadow-sm'>
               <div className='flex items-center justify-between'>
-                <div className='text-slate-200 font-semibold'>
+                <div className='text-slate-800 font-semibold'>
                   최종 점수: {(Number(result.finalScore) || 0).toFixed(4)}
                 </div>
                 <div
                   className={`text-sm px-2 py-1 rounded-md ${
                     result.finalPrediction
-                      ? 'bg-rose-600/20 text-rose-300'
-                      : 'bg-emerald-600/20 text-emerald-300'
+                      ? 'bg-rose-100 text-rose-700'
+                      : 'bg-emerald-100 text-emerald-700'
                   }`}
                 >
                   {result.finalPrediction ? 'Fraud' : 'Legit'}
                 </div>
               </div>
 
-              <div className='mt-2 text-xs text-slate-400'>
+              <div className='mt-2 text-xs text-slate-900'>
                 threshold: {Number(result.threshold).toFixed(2)} · modelVersion:{' '}
                 {result.modelVersion} · {result.processingTimeMs}ms
                 {result.predictionTime ? ` · ${result.predictionTime}` : ''}
@@ -312,7 +315,7 @@ export default function ModelPredictorPanel({
                 )}
               </div>
               {result.errorMessage && (
-                <div className='mt-1 text-xs text-amber-300'>
+                <div className='mt-1 text-xs text-amber-600'>
                   error: {result.errorMessage}
                 </div>
               )}
@@ -323,12 +326,12 @@ export default function ModelPredictorPanel({
                 <ScoreBar label='CatBoost' score={scores.catboost} />
               </div>
 
-              <div className='mt-2 text-xs text-slate-400'>
+              <div className='mt-2 text-xs text-slate-900'>
                 weights ⇒ lgbm {weights.lgbm.toFixed(3)} · xgb{' '}
                 {weights.xgboost.toFixed(3)} · cat {weights.catboost.toFixed(3)}
               </div>
 
-              <pre className='mt-4 text-[11px] leading-5 bg-slate-950/60 border border-slate-800 rounded-md p-3 overflow-auto text-slate-200'>
+              <pre className='mt-4 overflow-auto rounded-md border border-[#0E2975] bg-white p-3 text-[11px] leading-5 text-slate-700'>
                 {JSON.stringify(toDisplayResult(result), null, 2)}
               </pre>
             </div>

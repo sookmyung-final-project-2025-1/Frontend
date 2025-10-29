@@ -135,15 +135,15 @@ export default function RealtimeOverview() {
                 >
                   <CartesianGrid
                     strokeDasharray='3 3'
-                    stroke='#374151'
-                    opacity={0.3}
+                    stroke='#E2E8F0'
+                    opacity={0.8}
                   />
                   <XAxis
                     dataKey='time'
-                    stroke='#9CA3AF'
+                    stroke='#94A3B8'
                     fontSize={11}
-                    tick={{ fill: '#9CA3AF' }}
-                    axisLine={{ stroke: '#4B5563' }}
+                    tick={{ fill: '#64748B' }}
+                    axisLine={{ stroke: '#CBD5F5' }}
                   />
                   <YAxis
                     yAxisId='left'
@@ -164,12 +164,12 @@ export default function RealtimeOverview() {
                   />
                   <Tooltip
                     contentStyle={{
-                      background: '#1e293b',
-                      border: '1px solid #334155',
+                      background: '#ffffff',
+                      border: '1px solid #E5E7EB',
                       borderRadius: '8px',
-                      color: '#e2e8f0',
+                      color: '#0f172a',
                     }}
-                    labelStyle={{ color: '#cbd5e1' }}
+                    labelStyle={{ color: '#64748B' }}
                     formatter={(v: any, name: any) => {
                       if (name === '사기율(%)')
                         return [`${Number(v).toFixed(2)}%`, name];
@@ -228,7 +228,7 @@ export default function RealtimeOverview() {
                   <RadialBar
                     dataKey='value'
                     cornerRadius={8}
-                    background={{ fill: '#374151' }}
+                    background={{ fill: '#E2E8F0' }}
                     fill={
                       avgConfPct >= 80
                         ? '#22C55E'
@@ -242,7 +242,7 @@ export default function RealtimeOverview() {
                     y='50%'
                     textAnchor='middle'
                     dominantBaseline='middle'
-                    fill='#e2e8f0'
+                    fill='#1f2937'
                     fontSize={28}
                     fontWeight={700}
                   >
@@ -256,20 +256,20 @@ export default function RealtimeOverview() {
               {/* 상세 지표 */}
               <div className='mt-4 w-full space-y-3'>
                 <div className='flex justify-between items-center text-sm'>
-                  <span className='text-slate-400'>총 거래 수</span>
-                  <span className='text-slate-200 font-medium'>
+                  <span className='text-slate-600'>총 거래 수</span>
+                  <span className='font-medium text-slate-900'>
                     {latestStats?.totalTransactions.toLocaleString() ?? '-'}
                   </span>
                 </div>
                 <div className='flex justify-between items-center text-sm'>
-                  <span className='text-slate-400'>현재 사기율</span>
+                  <span className='text-slate-600'>현재 사기율</span>
                   <span
                     className={`font-medium ${
                       Number(latestStats?.fraudRate ?? 0) > 5
-                        ? 'text-red-400'
+                        ? 'text-red-600'
                         : Number(latestStats?.fraudRate ?? 0) > 2
-                          ? 'text-yellow-400'
-                          : 'text-green-400'
+                          ? 'text-yellow-600'
+                          : 'text-green-600'
                     }`}
                   >
                     {latestStats?.fraudRate}%
@@ -291,28 +291,28 @@ export default function RealtimeOverview() {
             >
               <CartesianGrid
                 strokeDasharray='3 3'
-                stroke='#374151'
-                opacity={0.3}
+                stroke='#E2E8F0'
+                opacity={0.8}
               />
               <XAxis
                 dataKey='time'
-                stroke='#9CA3AF'
+                stroke='#94A3B8'
                 fontSize={11}
-                tick={{ fill: '#9CA3AF' }}
+                tick={{ fill: '#64748B' }}
               />
               <YAxis
-                stroke='#9CA3AF'
+                stroke='#94A3B8'
                 fontSize={11}
-                tick={{ fill: '#9CA3AF' }}
+                tick={{ fill: '#64748B' }}
               />
               <Tooltip
                 contentStyle={{
-                  background: '#1e293b',
-                  border: '1px solid #334155',
+                  background: '#ffffff',
+                  border: '1px solid #E5E7EB',
                   borderRadius: '8px',
-                  color: '#e2e8f0',
+                  color: '#0f172a',
                 }}
-                labelStyle={{ color: '#cbd5e1' }}
+                labelStyle={{ color: '#64748B' }}
                 formatter={(v: any, name: any) => [
                   Number(v).toLocaleString(),
                   name,
@@ -347,9 +347,9 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <div className='rounded-xl border border-slate-800 bg-slate-900/40 backdrop-blur-sm'>
+    <div className='rounded-xl border border-[#0E2975] bg-white shadow-sm'>
       <div className='p-6'>
-        <div className='text-base font-semibold text-slate-200 mb-4'>
+        <div className='mb-4 text-base font-semibold text-slate-800'>
           {title}
         </div>
         {children}
@@ -375,25 +375,25 @@ function StatCard({
     trend === undefined
       ? ''
       : trend > 0
-        ? 'text-green-400'
+        ? 'text-green-600'
         : trend < 0
-          ? 'text-red-400'
-          : 'text-slate-400';
+          ? 'text-red-600'
+          : 'text-slate-500';
 
   const trendIcon =
     trend === undefined ? '' : trend > 0 ? '↗' : trend < 0 ? '↘' : '→';
 
   return (
-    <div className='bg-slate-900/60 border border-slate-700 rounded-lg p-4'>
-      <div className='text-xs text-slate-400 mb-1'>{title}</div>
+    <div className='rounded-lg border border-[#0E2975] bg-white p-4 shadow-sm'>
+      <div className='mb-1 text-xs text-slate-500'>{title}</div>
       <div className='flex items-baseline justify-between'>
         <div className='flex items-baseline'>
-          <span className='text-xl font-bold text-slate-100'>{value}</span>
-          <span className='text-sm text-slate-400 ml-1'>{unit}</span>
+          <span className='text-xl font-bold text-slate-900'>{value}</span>
+          <span className='ml-1 text-sm text-slate-500'>{unit}</span>
         </div>
         {trend !== undefined && (
-          <div className={`text-xs ${trendColor} flex items-center`}>
-            <span className='mr-1'>{trendIcon}</span>
+          <div className={`flex items-center text-xs ${trendColor}`}>
+            <span className='mr-1 text-base leading-none'>{trendIcon}</span>
             <span>{Math.abs(trend).toFixed(isPercentage ? 2 : 0)}</span>
           </div>
         )}

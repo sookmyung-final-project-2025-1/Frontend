@@ -96,11 +96,13 @@ export default function ThresholdSettings({
         e.preventDefault();
         handleSave();
       }}
-      className='rounded-2xl border border-slate-800 bg-slate-900/40'
+      className='rounded-2xl border border-[#0E2975] bg-white shadow-sm'
     >
       <div className='p-4 space-y-6'>
         <div>
-          <div className='text-sm text-slate-300 mb-2'>임계치(Threshold)</div>
+          <div className='mb-2 text-sm font-semibold text-slate-900'>
+            임계치(Threshold)
+          </div>
           <div className='flex items-center gap-3'>
             <Slider
               value={threshold}
@@ -110,7 +112,7 @@ export default function ThresholdSettings({
               max={1}
               step={0.01}
             />
-            <div className='w-12 text-right text-sm'>
+            <div className='w-12 text-right text-sm text-slate-800'>
               {threshold.toFixed(2)}
             </div>
           </div>
@@ -118,7 +120,7 @@ export default function ThresholdSettings({
             <button
               type='submit'
               disabled={mutation.isPending || isLoading}
-              className='px-3 py-1.5 rounded-xl border border-slate-600 hover:bg-slate-800 disabled:opacity-50'
+              className='rounded-xl border border-blue-500 bg-blue-500 px-3 py-1.5 text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50'
             >
               {mutation.isPending ? '저장 중…' : '임계치 저장'}
             </button>

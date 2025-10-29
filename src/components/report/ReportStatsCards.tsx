@@ -45,21 +45,21 @@ export default function ReportStatsCards({
       </div>
 
       {/* 상세 통계 패널 */}
-      <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
+      <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
         <div className='flex items-center justify-between mb-3'>
-          <div className='text-sm text-slate-400 flex items-center gap-2'>
-            <Clock className='w-4 h-4' />
+          <div className='flex items-center gap-2 text-sm text-slate-600'>
+            <Clock className='h-4 w-4' />
             상세 통계
           </div>
-          <div className='text-xs text-slate-400'>
+          <div className='text-xs text-slate-500'>
             계산시각:{' '}
             {stats ? new Date(stats.calculatedAt).toLocaleString('ko-KR') : '-'}
           </div>
         </div>
 
-        {statsLoading && <div className='text-slate-400'>불러오는 중...</div>}
+        {statsLoading && <div className='text-slate-500'>불러오는 중...</div>}
         {!statsLoading && !stats && (
-          <div className='text-slate-400'>통계 데이터가 없습니다.</div>
+          <div className='text-slate-500'>통계 데이터가 없습니다.</div>
         )}
 
         {stats && (
@@ -87,15 +87,15 @@ export default function ReportStatsCards({
         {/* 사유 분포 */}
         {stats && (
           <div className='mt-4'>
-            <div className='text-sm text-slate-400 mb-2'>사유별 신고 수</div>
+            <div className='mb-2 text-sm text-slate-600'>사유별 신고 수</div>
             <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2'>
               {Object.entries(stats.reportReasons ?? {}).map(([k, v]) => (
                 <div
                   key={k}
-                  className='flex items-center justify-between bg-slate-800/50 border border-slate-700 rounded-lg px-3 py-2'
+                  className='flex items-center justify-between rounded-lg border border-[#0E2975] bg-white px-3 py-2 shadow-sm'
                 >
-                  <span className='text-xs text-slate-300'>{k}</span>
-                  <span className='text-sm font-medium text-slate-100'>
+                  <span className='text-xs text-slate-600'>{k}</span>
+                  <span className='text-sm font-medium text-slate-900'>
                     {Number(v).toLocaleString()}
                   </span>
                 </div>
@@ -120,15 +120,15 @@ function Card({
   icon: React.ReactNode;
 }) {
   return (
-    <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
+    <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
       <div className='flex items-center justify-between'>
         <div>
-          <p className='text-sm text-slate-400'>{title}</p>
-          <p className='text-2xl font-semibold text-slate-100'>
+          <p className='text-sm text-slate-600'>{title}</p>
+          <p className='text-2xl font-semibold text-slate-900'>
             {loading ? '불러오는 중...' : value}
           </p>
         </div>
-        <div className='text-slate-400'>{icon}</div>
+        <div className='text-slate-500'>{icon}</div>
       </div>
     </div>
   );
@@ -136,9 +136,9 @@ function Card({
 
 function KV({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className='bg-slate-800/40 border border-slate-700 rounded-lg p-3'>
-      <div className='text-xs text-slate-400'>{label}</div>
-      <div className='text-sm text-slate-100 font-medium'>{value}</div>
+    <div className='rounded-lg border border-[#0E2975] bg-white p-3 shadow-sm'>
+      <div className='text-xs text-slate-600'>{label}</div>
+      <div className='text-sm font-medium text-slate-900'>{value}</div>
     </div>
   );
 }

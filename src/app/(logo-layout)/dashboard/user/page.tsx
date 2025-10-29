@@ -80,12 +80,12 @@ export default function ReportsPage() {
   const refresh = () => listQuery.refetch();
 
   return (
-    <div className='space-y-8 bg-slate-900/40 border border-slate-800 rounded-xl p-8'>
+    <div className='space-y-8 rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
       {/* 상단 헤더 */}
       <div className='flex items-center justify-between'>
         <div>
-          <h1 className='text-2xl font-semibold'>신고 관리</h1>
-          <p className='text-sm text-slate-400'>신고 접수/검토/우선순위 관리</p>
+          <h1 className='text-2xl font-semibold text-slate-900'>신고 관리</h1>
+          <p className='text-sm text-slate-800'>신고 접수/검토/우선순위 관리</p>
         </div>
       </div>
 

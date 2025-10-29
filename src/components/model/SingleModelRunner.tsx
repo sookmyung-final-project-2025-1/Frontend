@@ -140,7 +140,7 @@ export default function SingleModelRunner({
     embedded ? (
       <div className='relative'>{children}</div>
     ) : (
-      <section className='bg-slate-900/40 border border-slate-800 rounded-xl p-8 relative'>
+      <section className='relative rounded-xl border border-[#0E2975] bg-white p-8 shadow-sm'>
         {children}
       </section>
     );
@@ -148,12 +148,12 @@ export default function SingleModelRunner({
   return (
     <Container>
       <div className='flex items-center justify-between mb-6'>
-        <h3 className='text-xl font-semibold text-slate-200'>단일 모델 예측</h3>
+        <h3 className='text-xl font-semibold text-slate-900'>단일 모델 예측</h3>
         <div className='flex items-center gap-3'>
           <select
             value={model}
             onChange={(e) => setModel(e.target.value as ModelType)}
-            className='rounded-md border border-slate-700 bg-slate-800 px-2 py-1 text-slate-100 text-sm'
+            className='rounded-md border border-[#0E2975] bg-white px-2 py-1 text-sm text-slate-900 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
             aria-label='모델 선택'
           >
             <option value='lgbm'>LGBM</option>
@@ -163,7 +163,7 @@ export default function SingleModelRunner({
           <button
             onClick={handleRun}
             disabled={mutation.isPending}
-            className='px-3 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50'
+            className='rounded-lg bg-blue-500 px-3 py-2 text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50'
             title='선택한 단일 모델로 예측'
           >
             {mutation.isPending ? '테스트 중…' : '테스트 시작'}
@@ -174,42 +174,42 @@ export default function SingleModelRunner({
       <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
         {/* 좌: 요청 JSON */}
         <div>
-          <div className='text-sm text-slate-300 mb-2'>
+          <div className='mb-2 text-sm text-slate-700'>
             transactionRequest JSON
           </div>
           <textarea
             value={raw}
             onChange={(e) => setRaw(e.target.value)}
             spellCheck={false}
-            className='w-full h-64 rounded-lg border border-slate-800 bg-slate-950/40 p-3 font-mono text-xs text-slate-100'
+            className='h-64 w-full rounded-lg border border-[#0E2975] bg-white p-3 font-mono text-xs text-slate-900 shadow-sm'
             placeholder='{"transactionId":123, ...}'
           />
-          <p className='mt-2 text-xs text-slate-500'>
+          <p className='mt-2 text-xs text-slate-600'>
             샘플을 편집 후 “실행”을 누르면, 선택된 단일 모델로만 예측합니다.
           </p>
         </div>
 
         {/* 우: 결과 */}
         <div className='space-y-3'>
-          <div className='text-sm text-slate-300'>결과</div>
+          <div className='text-sm text-slate-700'>결과</div>
 
           {!result && (
-            <div className='text-slate-500 text-sm border border-slate-800 rounded-lg p-4'>
+            <div className='rounded-lg border border-[#0E2975] bg-white p-4 text-sm text-slate-600 shadow-sm'>
               실행 결과가 여기에 표시됩니다.
             </div>
           )}
 
           {result && (
-            <div className='border border-slate-800 rounded-lg p-4 bg-slate-950/40'>
-              <div className='text-slate-200 font-semibold'>
+            <div className='rounded-lg border border-[#0E2975] bg-white p-4 shadow-sm'>
+              <div className='font-semibold text-slate-900'>
                 {result.modelType.toUpperCase()} · 점수:{' '}
                 {(Number(result.score) || 0).toFixed(4)}
               </div>
-              <div className='mt-2 text-xs text-slate-400'>
+              <div className='mt-2 text-xs text-slate-600'>
                 modelVersion: {result.modelVersion} · {result.processingTimeMs}
                 ms · tx: {String(result.transactionId)}
               </div>
-              <pre className='mt-4 text-[11px] leading-5 bg-slate-950/60 border border-slate-800 rounded-md p-3 overflow-auto text-slate-200'>
+              <pre className='mt-4 overflow-auto rounded-md border border-[#0E2975] bg-gray-100 p-3 text-[11px] leading-5 text-slate-800'>
                 {JSON.stringify(result, null, 2)}
               </pre>
             </div>

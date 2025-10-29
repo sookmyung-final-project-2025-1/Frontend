@@ -89,58 +89,58 @@ export default function WeeklyStatsChart() {
   const fmtPct = (v: number) => `${(v * 100).toFixed(2)}%`;
 
   return (
-    <div className='rounded-2xl border border-slate-800 bg-slate-900/40 xl:col-span-2 h-fit'>
+    <div className='rounded-2xl border border-[#0E2975] bg-white shadow-sm xl:col-span-2 h-fit'>
       <div className='p-6'>
-        <div className='text-xl font-semibold text-slate-200'>
+        <div className='text-xl font-semibold text-slate-900'>
           주간 지표 (전체 거래 & 사기율)
         </div>
 
         {/* 컨트롤 */}
         <div className='mb-3 grid grid-cols-1 md:grid-cols-3 gap-3'>
           <div className='md:col-span-1'>
-            <label className='block text-xs text-slate-400 mb-1'>시작일</label>
+            <label className='mb-1 block text-xs text-slate-600'>시작일</label>
             <input
               type='date'
               value={startLocal}
               onChange={(e) => setStartLocal(e.target.value)}
-              className='w-full rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-slate-100'
+              className='w-full rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-900 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
               max={toLocalDateInput(today)}
             />
           </div>
           <div className='md:col-span-2 grid grid-cols-2 gap-3'>
             <div>
-              <label className='block text-xs text-slate-400 mb-1'>
+              <label className='mb-1 block text-xs text-slate-600'>
                 종료일(자동)
               </label>
               <input
                 type='date'
                 value={endLocalDisplay}
-                className='w-full rounded-lg border border-slate-800 bg-slate-900/40 px-3 py-2 text-slate-400'
+                className='w-full rounded-lg border border-[#0E2975] bg-white px-3 py-2 text-slate-600 shadow-sm'
                 disabled
               />
             </div>
             <div>
-              <label className='block text-xs text-slate-400 mb-1'>기간</label>
-              <div className='h-[38px] flex items-center px-3 rounded-lg border border-slate-800 bg-slate-900/40 text-slate-400'>
+              <label className='mb-1 block text-xs text-slate-600'>기간</label>
+              <div className='flex h-[38px] items-center rounded-lg border border-[#0E2975] bg-white px-3 text-slate-600 shadow-sm'>
                 7일 범위 (주간 집계 응답 사용)
               </div>
             </div>
           </div>
         </div>
 
-        <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
-          <div className='text-xs text-slate-500 mb-2'>
-            범위: <code className='text-slate-300'>{startLocal}</code> ~{' '}
-            <code className='text-slate-300'>{endLocalDisplay}</code>
+        <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
+          <div className='mb-2 text-xs text-slate-600'>
+            범위: <code className='text-slate-700'>{startLocal}</code> ~{' '}
+            <code className='text-slate-700'>{endLocalDisplay}</code>
           </div>
 
           <div className='h-64'>
             {isLoading ? (
-              <div className='h-full flex items-center justify-center text-slate-400'>
+              <div className='flex h-full items-center justify-center text-slate-500'>
                 불러오는 중…
               </div>
             ) : error ? (
-              <div className='h-full flex items-center justify-center text-red-400'>
+              <div className='flex h-full items-center justify-center text-red-600'>
                 데이터를 불러오지 못했습니다.
               </div>
             ) : (
@@ -151,25 +151,28 @@ export default function WeeklyStatsChart() {
                   barCategoryGap='25%'
                   barGap={6}
                 >
-                  <CartesianGrid strokeDasharray='3 3' stroke='#374151' />
+                  <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
                   <XAxis
                     dataKey='weekLabel'
-                    stroke='#9CA3AF'
+                    stroke='#94A3B8'
                     fontSize={12}
+                    tick={{ fill: '#64748B' }}
                     interval='preserveStartEnd'
                   />
                   <YAxis
                     yAxisId='left'
-                    stroke='#9CA3AF'
+                    stroke='#94A3B8'
                     fontSize={12}
+                    tick={{ fill: '#64748B' }}
                     width={56}
                     allowDecimals={false}
                   />
                   <YAxis
                     yAxisId='right'
                     orientation='right'
-                    stroke='#9CA3AF'
+                    stroke='#94A3B8'
                     fontSize={12}
+                    tick={{ fill: '#64748B' }}
                     width={64}
                     domain={[0, maxRate]}
                     tickFormatter={(v) => fmtPct(Number(v))}
@@ -192,11 +195,13 @@ export default function WeeklyStatsChart() {
                       return [value as any, key as string];
                     }}
                     contentStyle={{
-                      background: '#0f172a',
-                      border: '1px solid #334155',
+                      background: '#ffffff',
+                      border: '1px solid #E5E7EB',
+                      borderRadius: '8px',
+                      color: '#0f172a',
                     }}
-                    labelStyle={{ color: '#cbd5e1' }}
-                    itemStyle={{ color: '#e2e8f0' }}
+                    labelStyle={{ color: '#64748B' }}
+                    itemStyle={{ color: '#1f2937' }}
                   />
 
                   <Legend

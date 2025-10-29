@@ -71,11 +71,11 @@ export default function SystemHealth() {
   };
 
   return (
-    <div className='rounded-2xl border border-slate-800 bg-slate-900/40 p-6 text-white'>
+    <div className='rounded-2xl border border-[#0E2975] bg-white p-6 text-slate-900 shadow-sm'>
       <div className='mx-auto space-y-8'>
         {/* 헤더 */}
         <div>
-          <p className='text-gray-600'>
+          <p className='text-slate-600'>
             마지막 체크: {new Date(data.checkedAt).toLocaleString('ko-KR')}
           </p>
         </div>
@@ -152,17 +152,19 @@ export default function SystemHealth() {
         </div> */}
 
         {/* 24시간 트렌드 차트 */}
-        <div className='bg-white rounded-lg shadow-sm p-6 border'>
-          <h3 className='text-lg font-semibold mb-4'>24시간 트렌드</h3>
+        <div className='rounded-lg border border-[#0E2975] bg-white p-6 shadow-sm'>
+          <h3 className='mb-4 text-lg font-semibold text-slate-900'>24시간 트렌드</h3>
           <div className='h-64'>
             <ResponsiveContainer width='100%' height='100%'>
               <LineChart data={timeSeriesData}>
-                <CartesianGrid strokeDasharray='3 3' />
-                <XAxis dataKey='hour' />
-                <YAxis yAxisId='left' domain={[0, 100]} />
+                <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
+                <XAxis dataKey='hour' stroke='#94A3B8' tick={{ fill: '#64748B' }} />
+                <YAxis yAxisId='left' domain={[0, 100]} stroke='#94A3B8' tick={{ fill: '#64748B' }} />
                 <YAxis
                   yAxisId='right'
                   orientation='right'
+                  stroke='#94A3B8'
+                  tick={{ fill: '#64748B' }}
                   tickFormatter={(value) => `${(value * 1000).toFixed(1)}ms`}
                 />
                 <Tooltip
@@ -177,6 +179,13 @@ export default function SystemHealth() {
                       return [`${(Number(value) * 100).toFixed(1)}%`, '신뢰도'];
                     return [value, name];
                   }}
+                  contentStyle={{
+                    background: '#ffffff',
+                    border: '1px solid #E5E7EB',
+                    borderRadius: '8px',
+                    color: '#0f172a',
+                  }}
+                  labelStyle={{ color: '#64748B' }}
                 />
                 <Line
                   yAxisId='left'

@@ -115,7 +115,7 @@ export default function StreamingTopBar({
   return (
     <div className='space-y-4'>
       {/* 상단 상태/액션 바 */}
-      <div className='flex flex-wrap items-center gap-3 rounded-xl border border-slate-700 bg-slate-900 p-3'>
+      <div className='flex flex-wrap items-center gap-3 rounded-xl border border-[#0E2975] bg-white p-3 shadow-sm'>
         <div className='flex items-center gap-2'>
           <span
             className={`h-2 w-2 rounded-full ${online ? 'bg-emerald-500' : 'bg-yellow-500'}`}
@@ -125,7 +125,7 @@ export default function StreamingTopBar({
                 : 'WebSocket connecting/disconnected'
             }
           />
-          <span className='text-sm text-slate-300'>
+          <span className='text-sm text-slate-600'>
             {online ? '온라인' : '연결 중...'}
           </span>
         </div>
@@ -134,7 +134,7 @@ export default function StreamingTopBar({
           {!playing ? (
             <button
               onClick={() => onPlay()}
-              className='rounded-md bg-emerald-600 px-3 py-1 text-sm text-white hover:bg-emerald-500 disabled:opacity-50'
+              className='rounded-md bg-emerald-500 px-3 py-1 text-sm text-white transition hover:bg-emerald-600 disabled:opacity-50'
               disabled={loading}
             >
               ▶ 재생
@@ -142,7 +142,7 @@ export default function StreamingTopBar({
           ) : (
             <button
               onClick={() => onPause()}
-              className='rounded-md bg-slate-700 px-3 py-1 text-sm text-white hover:bg-slate-600 disabled:opacity-50'
+              className='rounded-md border border-gray-300 bg-white px-3 py-1 text-sm text-slate-700 transition hover:bg-gray-100 disabled:opacity-50'
               disabled={loading}
             >
               ⏸ 일시정지
@@ -151,7 +151,7 @@ export default function StreamingTopBar({
 
           <button
             onClick={onRefresh}
-            className='rounded-md bg-slate-800 px-3 py-1 text-sm text-slate-200 hover:bg-slate-700 disabled:opacity-50'
+            className='rounded-md border border-[#0E2975] bg-white px-3 py-1 text-sm text-slate-700 transition hover:bg-white/80 disabled:opacity-50'
             disabled={loading}
             title='상태 새로고침'
           >
@@ -161,11 +161,11 @@ export default function StreamingTopBar({
       </div>
 
       {/* 타임머신 & 속도 & 범위 */}
-      <div className='space-y-3 rounded-xl border border-slate-700 bg-slate-900 p-3'>
+      <div className='space-y-3 rounded-xl border border-[#0E2975] bg-white p-3 shadow-sm'>
         <div className='flex flex-wrap items-center gap-3'>
           {/* 타임머신 입력 */}
           <div className='flex items-center gap-2'>
-            <label className='text-sm text-slate-300'>타임머신 시점</label>
+            <label className='text-sm text-slate-600'>타임머신 시점</label>
             <input
               placeholder={ph}
               suppressHydrationWarning
@@ -173,7 +173,7 @@ export default function StreamingTopBar({
               onChange={(e) => setSeekInput(e.target.value)}
               onKeyDown={handleEnterSeek}
               disabled={loading}
-              className='w-64 rounded-md border border-slate-700 bg-slate-800 px-3 py-1 text-sm outline-none'
+              className='w-64 rounded-md border border-[#0E2975] bg-white px-3 py-1 text-sm text-slate-800 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20 disabled:bg-gray-50'
             />
             <button
               onClick={async () => {
@@ -183,7 +183,7 @@ export default function StreamingTopBar({
                 await onSeek(iso);
                 setSeekInput('');
               }}
-              className='rounded-md bg-indigo-600 px-3 py-1 text-sm text-white hover:bg-indigo-500 disabled:opacity-50'
+              className='rounded-md bg-indigo-500 px-3 py-1 text-sm text-white transition hover:bg-indigo-600 disabled:opacity-50'
               disabled={loading || !seekInput || !toIsoInput(seekInput)}
             >
               이동
@@ -192,18 +192,18 @@ export default function StreamingTopBar({
 
           {/* 속도 제어 */}
           <div className='flex items-center gap-2'>
-            <label className='text-sm text-slate-300'>배속</label>
+            <label className='text-sm text-slate-600'>배속</label>
             <input
               type='number'
               step='0.1'
               min='0.1'
               value={speedInput}
               onChange={(e) => setSpeedInput(e.target.value)}
-              className='w-20 rounded-md border border-slate-700 bg-slate-800 px-2 py-1 text-sm outline-none'
+              className='w-20 rounded-md border border-[#0E2975] bg-white px-2 py-1 text-sm text-slate-800 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
             />
             <button
               onClick={handleSpeedApply}
-              className='rounded-md bg-slate-700 px-3 py-1 text-sm text-white hover:bg-slate-600 disabled:opacity-50'
+              className='rounded-md border border-gray-300 bg-white px-3 py-1 text-sm text-slate-700 transition hover:bg-gray-100 disabled:opacity-50'
               disabled={loading}
             >
               적용
@@ -212,17 +212,17 @@ export default function StreamingTopBar({
 
           {/* 범위 */}
           <div className='flex items-center gap-2'>
-            <label className='text-sm text-slate-300'>범위</label>
+            <label className='text-sm text-slate-600'>범위</label>
             <select
               value={timeRange}
               onChange={(e) => onTimeRangeChange(e.target.value as TimeRange)}
-              className='rounded-md border border-slate-700 bg-slate-800 px-2 py-1 text-sm text-slate-200 outline-none'
+              className='rounded-md border border-[#0E2975] bg-white px-2 py-1 text-sm text-slate-800 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
             >
               <option value='24h'>24시간</option>
               <option value='7d'>7일</option>
               <option value='30d'>30일</option>
             </select>
-            <span className='text-xs text-slate-400'>총 {totalDuration}h</span>
+            <span className='text-xs text-slate-500'>총 {totalDuration}h</span>
           </div>
         </div>
 
@@ -234,10 +234,10 @@ export default function StreamingTopBar({
             max={100}
             value={currentPosition}
             onChange={(e) => onPositionChange(Number(e.target.value))}
-            className='h-1 w-full cursor-pointer appearance-none rounded bg-slate-700 accent-indigo-500'
+            className='h-1 w-full cursor-pointer appearance-none rounded bg-gray-200 accent-blue-500'
             disabled={loading}
           />
-          <span className='w-16 text-right text-sm text-slate-300'>
+          <span className='w-16 text-right text-sm text-slate-600'>
             {resolvedPositionPct}%
           </span>
         </div>

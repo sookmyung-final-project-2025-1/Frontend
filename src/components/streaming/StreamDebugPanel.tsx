@@ -45,12 +45,12 @@ export default function DetectionLineChart() {
   }, [data]);
 
   return (
-    <div className='bg-slate-900/40 border border-slate-800 rounded-xl p-4'>
-      <div className='flex items-center justify-between mb-3'>
-        <h3 className='text-slate-100 font-semibold'>
+    <div className='rounded-xl border border-[#0E2975] bg-white p-4 shadow-sm'>
+      <div className='mb-3 flex items-center justify-between'>
+        <h3 className='font-semibold text-slate-900'>
           Detection Score (Realtime)
         </h3>
-        <div className='text-xs text-slate-300'>points: {chartData.length}</div>
+        <div className='text-xs text-slate-600'>points: {chartData.length}</div>
       </div>
 
       <div className='h-72'>
@@ -59,26 +59,75 @@ export default function DetectionLineChart() {
             data={chartData}
             margin={{ top: 5, right: 16, left: 0, bottom: 0 }}
           >
-            <CartesianGrid strokeDasharray='3 3' />
-            <XAxis dataKey='label' tick={{ fontSize: 12 }} />
-            <YAxis tick={{ fontSize: 12 }} />
-            <Tooltip />
+            <CartesianGrid strokeDasharray='3 3' stroke='#E2E8F0' />
+            <XAxis
+              dataKey='label'
+              tick={{ fontSize: 12, fill: '#64748B' }}
+              stroke='#94A3B8'
+            />
+            <YAxis
+              tick={{ fontSize: 12, fill: '#64748B' }}
+              stroke='#94A3B8'
+            />
+            <Tooltip
+              contentStyle={{
+                background: '#ffffff',
+                border: '1px solid #E5E7EB',
+                borderRadius: '8px',
+                color: '#0f172a',
+              }}
+              labelStyle={{ color: '#64748B' }}
+            />
             <Legend />
             {/* 전체 score */}
-            <Line type='monotone' dataKey='score' dot={false} name='score' />
+            <Line
+              type='monotone'
+              dataKey='score'
+              stroke='#2563EB'
+              strokeWidth={2}
+              dot={false}
+              name='score'
+            />
             {/* 모델별 기여(원하면 숨기거나 토글 UI 추가) */}
-            <Line type='monotone' dataKey='lgbm' dot={false} name='lgbm' />
-            <Line type='monotone' dataKey='xgb' dot={false} name='xgb' />
-            <Line type='monotone' dataKey='cat' dot={false} name='cat' />
+            <Line
+              type='monotone'
+              dataKey='lgbm'
+              stroke='#22C55E'
+              strokeWidth={1.5}
+              dot={false}
+              name='lgbm'
+            />
+            <Line
+              type='monotone'
+              dataKey='xgb'
+              stroke='#FACC15'
+              strokeWidth={1.5}
+              dot={false}
+              name='xgb'
+            />
+            <Line
+              type='monotone'
+              dataKey='cat'
+              stroke='#A855F7'
+              strokeWidth={1.5}
+              dot={false}
+              name='cat'
+            />
             {/* 사기만 강조하고 싶다면 점으로 찍기 */}
             <Line
               type='linear'
               dataKey='fraud'
               name='fraudOnly'
+              stroke='#F97316'
               strokeDasharray='4 2'
             />
             {/* 참고선 예: 임계값 0.5 */}
-            <ReferenceLine y={0.5} strokeOpacity={0.4} strokeDasharray='3 3' />
+            <ReferenceLine
+              y={0.5}
+              stroke='#475569'
+              strokeOpacity={0.4}
+              strokeDasharray='3 3'
+            />
             <Brush dataKey='label' height={20} travellerWidth={10} />
           </LineChart>
         </ResponsiveContainer>

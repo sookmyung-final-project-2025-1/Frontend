@@ -147,15 +147,17 @@ export default function WeightsSettings({
         e.preventDefault();
         handleSave();
       }}
-      className={`rounded-2xl border border-slate-800 bg-slate-900/40 p-4 space-y-6 ${className ?? ''}`}
+      className={`rounded-2xl border border-[#0E2975] bg-white p-4 shadow-sm space-y-6 ${className ?? ''}`}
     >
-      <div className='text-sm text-slate-300 mb-2'>앙상블 가중치</div>
+      <div className='mb-2 text-sm font-semibold text-slate-900'>
+        앙상블 가중치
+      </div>
 
       {!serverSnapshot && isLoading && (
         <div className='text-xs text-slate-500'>현재 가중치를 불러오는 중…</div>
       )}
       {error && (
-        <div className='text-xs text-red-400'>
+        <div className='text-xs text-red-600'>
           가중치 조회 실패. 기본값으로 표시됩니다.
         </div>
       )}
@@ -218,7 +220,7 @@ export default function WeightsSettings({
           <button
             type='submit'
             disabled={savingWeights || (!serverSnapshot && isLoading)}
-            className='px-3 py-1.5 rounded-xl bg-slate-100 text-slate-900 hover:opacity-90 disabled:opacity-50'
+            className='rounded-xl border border-blue-500 bg-blue-500 px-3 py-1.5 text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50'
           >
             {savingWeights ? '저장 중…' : '가중치 저장'}
           </button>
@@ -226,7 +228,7 @@ export default function WeightsSettings({
             type='button'
             onClick={handleReset}
             disabled={!serverSnapshot}
-            className='px-3 py-1.5 rounded-xl border border-slate-600 hover:bg-slate-800 disabled:opacity-50'
+            className='rounded-xl border border-gray-300 bg-white px-3 py-1.5 text-slate-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50'
           >
             리셋
           </button>
@@ -249,7 +251,7 @@ function WeightControl({
 }) {
   return (
     <div className='space-y-2'>
-      <div className='text-s text-slate-400'>{label}</div>
+      <div className='text-sm text-slate-600'>{label}</div>
       <Slider
         value={value}
         onChange={onChange}
@@ -258,7 +260,7 @@ function WeightControl({
         step={0.01}
         className='w-[280px] h-2 cursor-pointer'
       />
-      <div className='text-s text-slate-400'>
+      <div className='text-sm text-slate-500'>
         raw {value} · norm {normalized.toFixed(3)}
       </div>
     </div>

@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className='min-h-dvh bg-gradient-to-b from-[#EEF3FF] via-[#F7FAFF] to-white'>
+      <body className='min-h-dvh '>
         <Providers>{children}</Providers>
       </body>
     </html>

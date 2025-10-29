@@ -25,10 +25,10 @@ export default function ReportsTable({
   onRowClick,
 }: Props) {
   return (
-    <div className='rounded-xl border border-slate-800 bg-slate-900/30 overflow-hidden'>
+    <div className='rounded-xl border border-[#0E2975] bg-white shadow-sm overflow-hidden'>
       <div className='overflow-x-auto'>
-        <table className='min-w-full divide-y divide-slate-800'>
-          <thead className='bg-slate-900'>
+        <table className='min-w-full divide-y divide-gray-200'>
+          <thead className='bg-white'>
             <tr>
               {[
                 'ID',
@@ -41,19 +41,19 @@ export default function ReportsTable({
               ].map((h) => (
                 <th
                   key={h}
-                  className='px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-400'
+                  className='px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-slate-600'
                 >
                   {h}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className='divide-y divide-slate-800'>
+          <tbody className='divide-y divide-gray-200 bg-white'>
             {loading && rows.length === 0 ? (
               <tr>
                 <td
                   colSpan={7}
-                  className='px-6 py-12 text-center text-slate-400'
+                  className='px-6 py-12 text-center text-slate-500'
                 >
                   불러오는 중...
                 </td>
@@ -62,7 +62,7 @@ export default function ReportsTable({
               <tr>
                 <td
                   colSpan={7}
-                  className='px-6 py-12 text-center text-slate-400'
+                  className='px-6 py-12 text-center text-slate-500'
                 >
                   데이터가 없습니다.
                 </td>
@@ -71,44 +71,44 @@ export default function ReportsTable({
               rows.map((r) => (
                 <tr
                   key={r.reportId}
-                  className='hover:bg-slate-800/40 cursor-pointer'
+                  className='cursor-pointer transition hover:bg-gray-100'
                   onClick={() => onRowClick(r.reportId)}
                 >
-                  <td className='px-4 py-3 text-sm text-slate-200'>
+                  <td className='px-4 py-3 text-sm text-slate-800'>
                     {r.reportId}
                   </td>
-                  <td className='px-4 py-3 text-sm text-slate-300'>
+                  <td className='px-4 py-3 text-sm text-slate-600'>
                     {r.transactionId}
                   </td>
                   <td className='px-4 py-3 text-sm'>
                     <Badge value={r.status} />
                   </td>
                   <td className='px-4 py-3 text-sm'>
-                    <span className='px-2 py-1 rounded bg-[#1f2937] text-slate-200'>
+                    <span className='px-2 py-1 rounded bg-gray-100 text-slate-700'>
                       {r.priority ?? '-'}
                     </span>
                   </td>
-                  <td className='px-4 py-3 text-sm text-slate-300'>
+                  <td className='px-4 py-3 text-sm text-slate-600'>
                     {r.reportedBy}
                   </td>
                   <td className='px-4 py-3 text-sm'>
                     {r.isFraudConfirmed ? (
                       <span
                         className='px-2 py-1 rounded'
-                        style={{ backgroundColor: '#14532d', color: '#86efac' }}
+                        style={{ backgroundColor: '#dcfce7', color: '#166534' }}
                       >
                         확정
                       </span>
                     ) : (
                       <span
                         className='px-2 py-1 rounded'
-                        style={{ backgroundColor: '#3f1d1d', color: '#fca5a5' }}
+                        style={{ backgroundColor: '#fee2e2', color: '#b91c1c' }}
                       >
                         미확정
                       </span>
                     )}
                   </td>
-                  <td className='px-4 py-3 text-sm text-slate-400'>
+                  <td className='px-4 py-3 text-sm text-slate-500'>
                     {formatDate(r.reportedAt)}
                   </td>
                 </tr>
@@ -119,11 +119,11 @@ export default function ReportsTable({
       </div>
 
       {/* 하단: 페이지네이션 + size */}
-      <div className='flex items-center justify-between p-3'>
-        <div className='flex items-center gap-2 text-sm text-slate-400'>
+      <div className='flex items-center justify-between bg-white p-3'>
+        <div className='flex items-center gap-2 text-sm text-slate-600'>
           <span>페이지당</span>
           <select
-            className='bg-slate-800 border border-slate-700 rounded px-2 py-1 text-slate-100'
+            className='rounded border border-[#0E2975] bg-white px-2 py-1 text-slate-800 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
             value={size}
             onChange={(e) => onPageSizeChange(Number(e.target.value))}
           >
@@ -137,7 +137,7 @@ export default function ReportsTable({
 
         <div className='flex items-center gap-1'>
           <button
-            className='p-2 rounded-lg border border-slate-700 text-slate-200 disabled:opacity-50'
+            className='p-2 rounded-lg border border-gray-300 bg-white text-slate-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50'
             onClick={() => onPageChange(0)}
             disabled={page <= 0}
             aria-label='first'
@@ -145,18 +145,18 @@ export default function ReportsTable({
             «
           </button>
           <button
-            className='p-2 rounded-lg border border-slate-700 text-slate-200 disabled:opacity-50'
+            className='p-2 rounded-lg border border-gray-300 bg-white text-slate-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50'
             onClick={() => onPageChange(page - 1)}
             disabled={page <= 0}
             aria-label='prev'
           >
             <ChevronLeft className='w-4 h-4' />
           </button>
-          <span className='px-2 text-slate-300 text-sm'>
+          <span className='px-2 text-sm text-slate-600'>
             {page + 1} / {Math.max(1, totalPages)}
           </span>
           <button
-            className='p-2 rounded-lg border border-slate-700 text-slate-200 disabled:opacity-50'
+            className='p-2 rounded-lg border border-gray-300 bg-white text-slate-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50'
             onClick={() => onPageChange(page + 1)}
             disabled={page >= totalPages - 1}
             aria-label='next'
@@ -164,7 +164,7 @@ export default function ReportsTable({
             <ChevronRight className='w-4 h-4' />
           </button>
           <button
-            className='p-2 rounded-lg border border-slate-700 text-slate-200 disabled:opacity-50'
+            className='p-2 rounded-lg border border-gray-300 bg-white text-slate-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50'
             onClick={() => onPageChange(Math.max(0, totalPages - 1))}
             disabled={page >= totalPages - 1}
             aria-label='last'
@@ -179,12 +179,12 @@ export default function ReportsTable({
 
 function Badge({ value }: { value: string }) {
   const map: Record<string, { bg: string; fg: string; label: string }> = {
-    PENDING: { bg: '#3f1d1d', fg: '#fca5a5', label: '대기' },
-    UNDER_REVIEW: { bg: '#2b2f3a', fg: '#93c5fd', label: '검토중' },
-    APPROVED: { bg: '#0f2f24', fg: '#86efac', label: '승인' },
-    REJECTED: { bg: '#3f1d1d', fg: '#fecaca', label: '거절' },
+    PENDING: { bg: '#fef3c7', fg: '#b45309', label: '대기' },
+    UNDER_REVIEW: { bg: '#dbeafe', fg: '#1d4ed8', label: '검토중' },
+    APPROVED: { bg: '#dcfce7', fg: '#166534', label: '승인' },
+    REJECTED: { bg: '#fee2e2', fg: '#b91c1c', label: '거절' },
   };
-  const c = map[value] ?? { bg: '#1f2937', fg: '#cbd5e1', label: value };
+  const c = map[value] ?? { bg: '#e5e7eb', fg: '#374151', label: value };
   return (
     <span
       className='px-2 py-1 rounded text-xs'

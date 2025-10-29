@@ -117,11 +117,13 @@ export default function TopBar({
       {/* 상단: 제목과 기본 정보 */}
       <div className='flex items-center justify-between'>
         <div>
-          <h1 className='text-2xl font-semibold'>Fraud Detection Dashboard</h1>
-          <p className='text-sm text-slate-400'>
+          <h1 className='text-2xl font-semibold text-slate-900'>
+            Fraud Detection Dashboard
+          </h1>
+          <p className='text-sm text-slate-600'>
             Virtual Time: {virtualTime || '-'} · Speed: {speed}x
             {!online && (
-              <span className='ml-2 text-amber-300'>
+              <span className='ml-2 text-amber-600'>
                 오프라인/서버 이슈 감지
               </span>
             )}
@@ -129,15 +131,15 @@ export default function TopBar({
         </div>
 
         {/* 시간 범위 선택 */}
-        <div className='flex rounded-lg bg-slate-800 border border-slate-700 p-1'>
+        <div className='flex rounded-lg border border-[#0E2975] bg-white p-1 shadow-sm'>
           {(Object.keys(timeRangeLabels) as TimeRange[]).map((range) => (
             <button
               key={range}
               onClick={() => onTimeRangeChange(range)}
               className={`px-3 py-1 text-sm rounded-md transition-colors ${
                 timeRange === range
-                  ? 'bg-blue-600 text-white'
-                  : 'text-slate-300 hover:text-white hover:bg-slate-700'
+                  ? 'bg-blue-500 text-white'
+                  : 'text-slate-600 hover:bg-gray-100'
               }`}
             >
               {timeRangeLabels[range]}
@@ -150,9 +152,9 @@ export default function TopBar({
       <div className='space-y-3'>
         {/* 프로그레스 바 */}
         <div className='space-y-2'>
-          <div className='flex justify-between text-xs text-slate-400'>
+          <div className='flex justify-between text-xs text-slate-600'>
             <span>0</span>
-            <span className='text-slate-300'>
+            <span className='text-slate-700'>
               {formatTime(currentPosition)} / {formatTime(100)}
             </span>
             <span>{timeRangeLabels[timeRange]}</span>
@@ -160,18 +162,18 @@ export default function TopBar({
 
           <div
             ref={progressRef}
-            className='relative h-2 bg-slate-700 rounded-full cursor-pointer'
+            className='relative h-2 cursor-pointer rounded-full bg-gray-200'
             onMouseDown={handleMouseDown}
           >
             {/* 프로그레스 */}
             <div
-              className='absolute top-0 left-0 h-full bg-blue-500 rounded-full transition-all'
+              className='absolute left-0 top-0 h-full rounded-full bg-blue-500 transition-all'
               style={{ width: `${currentPosition}%` }}
             />
 
             {/* 드래그 핸들 */}
             <div
-              className='absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-blue-500 rounded-full shadow-lg cursor-grab active:cursor-grabbing transition-transform hover:scale-110'
+              className='absolute top-1/2 h-4 w-4 -translate-y-1/2 cursor-grab rounded-full border-2 border-blue-500 bg-white shadow-lg transition-transform hover:scale-110 active:cursor-grabbing'
               style={{ left: `calc(${currentPosition}% - 8px)` }}
             />
           </div>
@@ -186,7 +188,7 @@ export default function TopBar({
                 type='button'
                 onClick={onPlay}
                 disabled={playing}
-                className='px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1'
+                className='flex items-center gap-1 rounded-lg bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-50'
               >
                 <span>▶</span>
                 <span>재생</span>
@@ -195,7 +197,7 @@ export default function TopBar({
                 type='button'
                 onClick={onPause}
                 disabled={!playing}
-                className='px-4 py-2 rounded-lg border border-slate-600 hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1'
+                className='flex items-center gap-1 rounded-lg border border-gray-300 bg-white px-4 py-2 text-slate-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50'
               >
                 <span>⏸</span>
                 <span>일시정지</span>
@@ -204,11 +206,11 @@ export default function TopBar({
 
             {/* 배속 드롭다운 */}
             <div className='flex items-center gap-2'>
-              <span className='text-sm text-slate-400'>배속</span>
+              <span className='text-sm text-slate-600'>배속</span>
               <select
                 value={speed}
                 onChange={(e) => onSpeedChange(Number(e.target.value))}
-                className='px-2 py-1 rounded-md bg-slate-800 border border-slate-700 text-sm outline-none focus:border-blue-500'
+                className='rounded-md border border-[#0E2975] bg-white px-2 py-1 text-sm text-slate-800 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
               >
                 {speedOptions.map((option) => (
                   <option key={option} value={option}>
@@ -221,11 +223,11 @@ export default function TopBar({
 
           {/* 우측: 직접 시점 이동 */}
           <div className='flex items-center gap-2'>
-            <span className='text-sm text-slate-400'>시점 이동</span>
+            <span className='text-sm text-slate-600'>시점 이동</span>
             <input
               placeholder={new Date().toISOString()}
               onKeyDown={handleSeekKeyDown}
-              className='w-48 px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-sm outline-none focus:border-blue-500'
+              className='w-48 rounded-md border border-[#0E2975] bg-white px-3 py-1 text-sm text-slate-800 shadow-sm focus:border-[#0E2975] focus:outline-none focus:ring-2 focus:ring-[#0E2975]/20'
             />
           </div>
         </div>
@@ -234,8 +236,8 @@ export default function TopBar({
       {/* 하단: 추가 정보 (선택사항) */}
       {playing && (
         <div className='flex items-center justify-center'>
-          <div className='flex items-center gap-2 px-3 py-1 bg-blue-900/30 border border-blue-700/50 rounded-full text-sm text-blue-200'>
-            <div className='w-2 h-2 bg-blue-400 rounded-full animate-pulse' />
+          <div className='flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-sm text-blue-700'>
+            <div className='h-2 w-2 animate-pulse rounded-full bg-blue-500' />
             <span>실시간 재생 중</span>
           </div>
         </div>

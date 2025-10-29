@@ -29,7 +29,7 @@ export default function DashboardTabs() {
     <>
       <nav
         role='tablist'
-        className='flex gap-2 overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/40 p-2 mb-5'
+        className='mb-5 flex gap-2 overflow-x-auto rounded-xl border border-[#0E2975] bg-white p-2 shadow-sm'
       >
         {TABS.map((tab) => {
           const active = pathname === tab.href;
@@ -42,8 +42,8 @@ export default function DashboardTabs() {
               className={cn(
                 'shrink-0 rounded-lg px-4 py-2 text-m transition',
                 active
-                  ? 'bg-slate-800 text-slate-100'
-                  : 'text-slate-300 hover:bg-slate-800/60'
+                  ? 'bg-blue-500 text-white'
+                  : 'text-slate-600 hover:bg-gray-100'
               )}
             >
               {tab.label}
@@ -58,7 +58,7 @@ export default function DashboardTabs() {
         <button
           type='button'
           onClick={() => setOpen(true)}
-          className='shrink-0 rounded-lg px-3 py-2 text-sm transition flex items-center gap-2 text-slate-300 hover:bg-slate-800/60'
+          className='flex shrink-0 items-center gap-2 rounded-lg px-3 py-2 text-sm text-slate-600 transition hover:bg-gray-100'
           aria-label='알람 열기'
         >
           <Bell className='w-4 h-4' />

@@ -67,7 +67,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       initialKpiRange={initialTimeRange}
       initialSeriesProbRange={initialTimeRange}
     >
-      <div className='bg-gradient-to-b from-slate-950 to-slate-900 text-slate-100 min-w-screen min-h-screen pb-12 overflow-x-hidden'>
+      <div className='bg-gradient-to-b from-[#F6F9FF] via-white to-[#EFF6FF] text-slate-100 min-w-screen min-h-screen pb-12 overflow-x-hidden'>
         <div className='w-[80vw] mx-auto relative'>
           <header className='sticky top-0 z-10 h-[72px] w-full bg-white/5 backdrop-blur pt-[15px] mb-[20px] flex justify-between items-center px-1 sm:px-0'>
             <Link
@@ -88,9 +88,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
               onClick={handleLogout}
               disabled={loggingOut}
               aria-busy={loggingOut}
-              className={`inline-flex items-center gap-2 rounded-lg border border-slate-700 px-3 py-2
-                text-sm font-medium text-slate-200 hover:bg-slate-800/60
-                disabled:opacity-60 disabled:cursor-not-allowed`}
+              className={`inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60`}
             >
               {loggingOut ? (
                 <>
